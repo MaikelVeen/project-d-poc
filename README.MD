@@ -23,7 +23,27 @@ This backend is built using Python. It includes facial recognition modules and m
 
 2. Install Flask. Instructions can be found [here](http://flask.pocoo.org/docs/1.0/installation/#installation)
 
-3. Install other dependencies for the project. These can be found in requirements.txt in the root folder of this project.
+3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project.
+
+### Running the backend
+
+The backend dependencies and framework (Flask) are installed within an virtual environment. You can learn more about packages, pip and virtual environments [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
+
+To run the backend enter this in the terminal (with activated venv):
+
+'''
+export FLASK_APP=flaskr
+export FLASK_ENV=development
+flask run
+'''
+
+For Windows:
+
+'''
+set FLASK_APP=flaskr
+set FLASK_ENV=development
+flask run
+'''
 
 ## Frontend installation and setup
 
