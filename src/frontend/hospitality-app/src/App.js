@@ -3,33 +3,27 @@ import './App.css';
 import WebcamCapture from './components/WebcamCapture'
 import { LayersManager, Layer } from 'react-layers-manager'
 import indicator from './assets/indicator.png'
+import HotelMenu from './components/Menu';
 
-const SampleModal = () => (
-  <Layer>
-    <img id="ref2" style= {{zIndex: 2, position: "absolute", top: 0}}  src = {indicator}/>
-  </Layer>
-)
 
-function App() {
-  return (
-    <LayersManager>,
-    <div className="App">
-      <header className="App-header">
-      <h1>Check in</h1>
+class App extends React.Component {
 
-       
-       
-      <div style= {{zIndex: 1, position: "absolute"}} id="ref1">
-              
-                <WebcamCapture/>
-                </div>
-                <SampleModal />
-              
-      </header>
-    </div>
+  render() {
+    return (
+      <LayersManager>
+        <div className="App">
+          <header className="App-header">
+            <HotelMenu />
+          </header>
+          <div style={{ zIndex: 3, position: "absolute" }} id="ref1">
+            <WebcamCapture />
+          </div>
+          <img id="ref2" style={{ zIndex: 5, position: "absolute", top: 1 }} src={indicator} />
+        </div>
       </LayersManager>
-  );
-}
 
+    );
+  }
+}
 
 export default App;
