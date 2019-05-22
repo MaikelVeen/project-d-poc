@@ -45,6 +45,7 @@
   top: 15px;
   left: 20px;
   margin: 50px 0px 0px 50px;
+  transform: rotateY(180deg)
   }
 #ref2 {
   display: flex;
@@ -55,6 +56,29 @@
   position: relative;
   top: 15px;
   left: 20px;
-  margin: 200px 0px 0px 500px;
+  margin: 220px 0px 0px 530px;
 }
 
+
+#ref4 {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  z-index: 1;
+  border: #282c34;
+  top: 35px;
+  left: 20px;
+  margin: 65px 0px 0px 50px;
+}
+#ref5 {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  z-index: 2;
+  height: 720px;
+  width: 1280px;
+  position: relative;
+  top: 15px;
+  left: 20px;
+  margin: 65px 0px 0px 50px;
+}
