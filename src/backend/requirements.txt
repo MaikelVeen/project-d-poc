@@ -1,1 +1,4 @@
 flask-expects-json
+qrcode
+uuid
+pillow
