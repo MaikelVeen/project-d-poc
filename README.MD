@@ -31,27 +31,27 @@ The backend dependencies and framework (Flask) are installed within an virtual e
 
 To run the backend you first have to make sure the virtual environment is running. To activate the corresponding environment:
 
-'. venv/bin/activate'
+`. venv/bin/activate`
 
 And on Windows:
 
-'venv\Scripts\activate'
+`venv\Scripts\activate`
 
 After you have actiavted the environment, you need to run the following commands:
 
-'''
+```
 export FLASK_APP=flaskr
 export FLASK_ENV=development
 flask run
-'''
+```
 
 For Windows:
 
-'''
+```
 set FLASK_APP=flaskr
 set FLASK_ENV=development
 flask run
-'''
+```
 
 ## Frontend installation and setup
 
