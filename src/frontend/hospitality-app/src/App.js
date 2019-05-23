@@ -1,26 +1,19 @@
 import React from 'react';
-import Webcam from "react-webcam";
 import './App.css';
+import WebcamCapture from './components/WebcamCapture'
+import { LayersManager, Layer } from 'react-layers-manager'
+import indicator from './assets/indicator.png'
+import HotelMenu from './components/Menu';
+import RootRouter from "./Router/RootRouter";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Webcam/>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+    <RootRouter/>
+     
+    );
+  }
 }
 
 export default App;
