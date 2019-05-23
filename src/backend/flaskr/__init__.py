@@ -26,6 +26,11 @@ def create_app(test_config=None):
     db.init_app(app)
 
     from . import register
+    from . import check_in
+    from . import recog
+
     app.register_blueprint(register.bp)
+    app.register_blueprint(check_in.bp)
+    app.register_blueprint(recog.bp)
 
     return app
