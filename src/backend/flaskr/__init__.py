@@ -4,6 +4,7 @@ from flask import Flask
 # Application factory method
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite')
@@ -19,11 +20,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/register')
-    def register():
-        #TODO accept registration
-        return 'Registered'
-
     @app.route('/check_in')
     def check_in():
         #TODO check in routine 
@@ -36,5 +32,8 @@ def create_app(test_config=None):
     
     from . import db
     db.init_app(app)
+
+    from . import register
+    app.register_blueprint(register.bp)
 
     return app
