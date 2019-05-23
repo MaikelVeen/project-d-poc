@@ -2,6 +2,8 @@ import os
 from flask import Flask
 
 # Application factory method
+
+
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
@@ -22,14 +24,14 @@ def create_app(test_config=None):
 
     @app.route('/check_in')
     def check_in():
-        #TODO check in routine 
+        # TODO check in routine
         return 'user checked in systems'
-    
+
     @app.route('/enter')
     def enter():
-        #TODO enter room
-        return False 
-    
+        # TODO enter room
+        return False
+
     from . import db
     db.init_app(app)
 
