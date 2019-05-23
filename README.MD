@@ -2,20 +2,13 @@
 
 In the CMI-wide project Emerging Media/Emerging Technologies, the technical creativity and research methods of students are matched with companies that are interested in research and development with the new technology. 
 
-This repository consist of the code of the d
-## Concept Description
-
 Imagine never having to use a key or NFC card to enter a room in a hotel. That's what this proof of concept is all about. The 'Keyless Door Entry System' uses facial recognition to enable entry to rooms in the hospitality branch. The proof of concept includes resevering rooms, a lobby registration demo and door entry demo. 
-
-## Architecture Overview
-
-TODO
 
 ---
 
 # Installation and setup
-
-## Backend installation and setup
+## Backend
+### Backend installation and setup
 
 This backend is built using Python. It includes facial recognition modules and more. The backend is a web api that is built using Flask.
 
@@ -24,6 +17,22 @@ This backend is built using Python. It includes facial recognition modules and m
 2. Install Flask. Instructions can be found [here](http://flask.pocoo.org/docs/1.0/installation/#installation)
 
 3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project.
+
+### Environment setup
+
+You want to make sure that your IDE has the virtual environment as Python intpreter. In Visual Studio code you can do this by adding some settings in `.vscode/settings.json`
+
+Add the following lines to this file:
+
+```json
+{
+  "python.venvPath": "${workspaceFolder}/src/backend/venv",
+  "python.pythonPath": "${workspaceFolder}/src/backend/venv/bin/python3",
+  "python.linting.pylintEnabled": true,
+  "python.linting.pep8Enabled": true,
+  "python.linting.enabled": true
+}
+```
 
 ### Running the backend
 
@@ -53,9 +62,61 @@ set FLASK_ENV=development
 flask run
 ```
 
-## Frontend installation and setup
+## Frontend 
 
 TODO
+
+---
+# API Documentation
+---
+# Register a new guest
+
+Registers a new user to the system. User gets saved to database and user is sent an email with a QR Code that gets generated
+
+**URL** : `/register/post`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**Data constraints**
+
+Provide name, email and phone number 
+
+
+**Data example** All fields must be sent.
+
+```json
+{
+	"name":"John Doe",
+	"email":"email@test.nl",
+	"phone":"0786184910"
+}
+```
+
+## Success Response
+
+**Condition** : If everything is OK 
+
+**Code** : `201 CREATED`
+
+**Content example**
+
+```json
+{
+    "id": 123,
+    "name": "Build something project dot com",
+    "url": "http://testserver/api/accounts/123/"
+}
+```
+
+## Error Responses
+
+**Condition** : If fields are missed or body is not json
+
+**Code** : `400 BAD REQUEST`
 
 ---
 
