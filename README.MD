@@ -29,7 +29,15 @@ This backend is built using Python. It includes facial recognition modules and m
 
 The backend dependencies and framework (Flask) are installed within an virtual environment. You can learn more about packages, pip and virtual environments [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 
-To run the backend enter this in the terminal (with activated venv):
+To run the backend you first have to make sure the virtual environment is running. To activate the corresponding environment:
+
+'. venv/bin/activate'
+
+And on Windows:
+
+'venv\Scripts\activate'
+
+After you have actiavted the environment, you need to run the following commands:
 
 '''
 export FLASK_APP=flaskr
