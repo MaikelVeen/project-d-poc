@@ -19,9 +19,20 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello World'
+    @app.route('/register')
+    def register():
+        #TODO accept registration
+        return 'Registered'
+
+    @app.route('/check_in')
+    def check_in():
+        #TODO check in routine 
+        return 'user checked in systems'
+    
+    @app.route('/enter')
+    def enter():
+        #TODO enter room
+        return False 
     
     from . import db
     db.init_app(app)
