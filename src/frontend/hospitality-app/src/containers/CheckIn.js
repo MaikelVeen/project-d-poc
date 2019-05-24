@@ -5,6 +5,11 @@ import WebcamCapture from '../components/WebcamCapture'
 
 
 class CheckIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {message : ""};
+  }
+
 
   render() {
     return (
@@ -13,6 +18,7 @@ class CheckIn extends React.Component {
         <HotelMenu />
       </header>
             <WebcamCapture/>
+            <p>{this.state.message}</p>
 </>
     );
   }
