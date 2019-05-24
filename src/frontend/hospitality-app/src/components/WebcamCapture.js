@@ -8,7 +8,24 @@ class WebcamCapture extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {image : ""};
+        this.state = {image : "", message: ""};
+      }
+
+    componentDidMount() {
+        fetch("http://localhost:5000/check/image")
+          .then(res => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                message: result
+              });
+            },
+            (error) => {
+              this.setState({
+                message: error
+              });
+            }
+          )
       }
 
     setRef = webcam => {
@@ -20,8 +37,28 @@ class WebcamCapture extends React.Component {
       this.setState({
           image : imageSource
       })
+      fetch('http://localhost:5000/check/image',{
+        method: 'POST',
+        body: JSON.stringify({
+        id: "djdjdj",
+        image_string: this.state.image
+        }),
+        headers: {"Content-Type": "application/json"}
+      })
+      .then(
+        (result) => {
+          this.setState({
+            message: result
+          });},
+        (error) => {
+            this.setState({
+              message: error
+            });
+          }
+      )
+        }
     
-    }
+    
     render() {
       const videoConstraints = {
         width: 1280,
@@ -56,7 +93,7 @@ class WebcamCapture extends React.Component {
       
         
         </LayersManager>
-        <p>{this.state.image} </p></>
+        <p>{this.state.message} </p></>
       );
     }
   }
