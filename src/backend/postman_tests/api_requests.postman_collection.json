@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "58596ca1-d59f-485b-ba49-e492ede10ecf",
+		"name": "api_requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register guest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"John Doe\",\n\t\"email\":\"email@test.nl\",\n\t\"phone\":\"0786184910\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/register/post?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"register",
+						"post"
+					],
+					"query": [
+						{
+							"key": "r",
+							"value": "87144.11977044071",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Create a new guest in the database"
+			},
+			"response": []
+		}
+	]
+}
