@@ -10,22 +10,7 @@ class CheckIn extends React.Component {
     this.state = {message : ""};
   }
 
-  componentDidMount() {
-    fetch("http://localhost:5000/check/image")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            message: result
-          });
-        },
-        (error) => {
-          this.setState({
-            message: error
-          });
-        }
-      )
-  }
+
   render() {
     return (
       <>
