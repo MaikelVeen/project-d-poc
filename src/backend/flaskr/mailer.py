@@ -1,10 +1,8 @@
-import os
 import smtplib
+import os
 
-name = "Rajiv"
-
-EMAIL_ADDRESS = os.environ.get('email_address')
-EMAIL_PASS = os.environ.get('email_pass')
+email = os.environ.get('email_address')
+pwd = os.environ.get('email_pass')
 
 def send_email(subject, msg):
      
@@ -12,14 +10,14 @@ def send_email(subject, msg):
         server.ehlo()
         server.starttls()
         server.ehlo()
-        server.login(EMAIL_ADDRESS, EMAIL_PASS)
-        message = 'subject: {}\n\n{}' .format(subject, msg)
-        server.sendmail(EMAIL_ADDRESS, "y.jethoe@hotmail.com", message)
+        server.login(email, pwd)
+        message = 'subject: {}\n\n{}'.format(subject, msg)
+        server.sendmail("rajivrockshd@gmail.com", "y.jethoe@hotmail.com", message)
         server.quit()
         print("Email sent!")
     
         
 
-subject = (name) 
+subject = "test" 
 msg = "Hope this works ;)"
 send_email(subject, msg)
