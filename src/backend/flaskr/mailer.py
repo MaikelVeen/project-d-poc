@@ -1,23 +1,26 @@
-import smtplib
 import os
+import smtplib
+from email.message import EmailMessage 
 
-email = os.environ.get('email_address')
-pwd = os.environ.get('email_pass')
+name = "Rajiv"
+email = "y.jethoe@hotmail.com"
 
-def send_email(subject, msg):
-     
-        server = smtplib.SMTP('smtp.gmail.com:587')
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-        server.login(email, pwd)
-        message = 'subject: {}\n\n{}'.format(subject, msg)
-        server.sendmail("rajivrockshd@gmail.com", "y.jethoe@hotmail.com", message)
+# getting OS env's so we don't commit sensitive info to source control
+EMAIL_ADDRESS = os.environ.get('email_address')
+EMAIL_PASS = os.environ.get('email_pass')
+
+message = EmailMessage()
+message['Subject'] = name
+message['From'] = "Rajivrocks"
+message['To'] = email
+message.set_content("Hello!")
+
+def send_email():
+        # connecting to gmail smtp mail server
+        server = smtplib.SMTP_SSL('smtp.gmail.com:465')
+        server.login(EMAIL_ADDRESS, EMAIL_PASS)
+        server.send_message(message)
         server.quit()
         print("Email sent!")
     
-        
-
-subject = "test" 
-msg = "Hope this works ;)"
-send_email(subject, msg)
+send_email()
