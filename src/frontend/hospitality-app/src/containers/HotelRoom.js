@@ -1,6 +1,6 @@
 import React from 'react';
 import HotelMenu from '../components/Menu';
-import WebcamCapture from '../components/WebcamCapture';
+import TimedWebcamCapture from '../components/TimedWebcamCapture';
 
 
 class HotelRoom extends React.Component {
@@ -17,7 +17,7 @@ class HotelRoom extends React.Component {
       <header className="App-header">
         <HotelMenu />
       </header>
-     <WebcamCapture />
+     <TimedWebcamCapture />
      </>
     );
   }

@@ -42,12 +42,14 @@
   justify-content: center;
   border: #282c34;
   transform: rotateY(180deg);
+  
   }
 #indicator {
   height: 50vh;
   display: block;
   margin-left: auto;
   margin-right: auto;
+
 }
 #QRscanner {
   display: flex;
@@ -55,4 +57,10 @@
   justify-content: center;
   transform: rotateY(180deg);
  
+}
+#text {
+  display: flex;
+  align-items:flex-end;
+  justify-content: end;
+ height: 100vh;
 }

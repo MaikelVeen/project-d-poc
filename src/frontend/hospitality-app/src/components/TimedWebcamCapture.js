@@ -3,11 +3,25 @@ import Webcam from "react-webcam";
 import "../App.css";
 import { LayersManager } from "react-layers-manager";
 import indicator from "../assets/indicator.png";
+import lodash from "lodash";
 
-class WebcamCapture extends React.Component {
+class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
     this.state = { image: "", message: "" };
+
+  }
+
+  getInitialState() {
+    return { elapsed: 0 };
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(this.capture, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   setRef = webcam => {
@@ -54,6 +68,7 @@ class WebcamCapture extends React.Component {
     };
 
     return (
+        <>
       <div>
         <LayersManager>
           <div style={{ zIndex: 1, position: "absolute" }} id="webcam">
@@ -62,8 +77,8 @@ class WebcamCapture extends React.Component {
               ref={this.setRef}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
-              height = '720'
-              width = '1280'
+              height="720"
+              width="1280"
             />
 
             <img
@@ -72,15 +87,12 @@ class WebcamCapture extends React.Component {
               src={indicator}
             />
           </div>
-          <button
-            style={{ zIndex: 2, position: "absolute" }}
-            onClick={this.capture}
-          >
-            Capture photo
-          </button>
+        
         </LayersManager>
+       
       </div>
+       <div id ="text">{this.state.image}</div></>
     );
   }
 }
-export default WebcamCapture;
+export default TimedWebcamCapture;
