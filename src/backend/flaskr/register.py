@@ -2,6 +2,7 @@ from flask import (
     Blueprint, flash, g, jsonify
 )
 from flaskr.db import get_db
+from flaskr.mailer import send_email
 from flask_expects_json import expects_json
 import uuid
 import qrcode
@@ -40,7 +41,7 @@ def register_post():
     # Temporary save the file to show it works
     qr_img = qrcode.make(user_id)
     qr_img.save(f"{user_id}.jpg")
-    # TODO send email to user
+    send_email(user_data['email'], user_data['name'], qr_img)
 
     response_dict = dict([('status', False)])
     response = jsonify(response_dict)
