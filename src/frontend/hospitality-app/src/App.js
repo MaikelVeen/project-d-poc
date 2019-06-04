@@ -3,18 +3,18 @@ import {Route} from 'react-router-dom';
 import {MainLayout} from './MainLayout.js';
 
 // Online reservation
-import {Home} from './Components/Home.js';
-import {Reservation} from './Components/Reservation.js';
-import {ConfirmRegistration} from './Components/ConfirmRegistration.js';
+import {Home} from './components/Home.js';
+import {Reservation} from './components/Reservation.js';
+import {ConfirmRegistration} from './components/ConfirmRegistration.js';
 
 // Check in
-import {Lobby} from './Components/Lobby.js';
-import {Checkin} from './Components/Checkin.js';
-import {RegisterFace} from './Components/RegisterFace.js';
-// import {Online} from './Components/Online.js';
+import {Lobby} from './components/Lobby.js';
+import {Checkin} from './components/Checkin.js';
+import {RegisterFace} from './components/RegisterFace.js';
+// import {Online} from './components/Online.js';
 
 // Hotel room
-import {Hotelroom} from './Components/Hotelroom.js';
+import {Hotelroom} from './components/Hotelroom.js';
 
 function App() {
   return (
