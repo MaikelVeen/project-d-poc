@@ -1,16 +1,15 @@
 import React from 'react';
 import HotelMenu from '../components/Menu';
-
-import Recognise from '../components/Recognise';
+import WebcamCapture from '../components/WebcamCapture';
 
 
 class HotelRoom extends React.Component {
   constructor(props) {
     super(props);
     
-    this.state = {open : false};
+    this.state = {open : false, QRScanner: true , width: 0, height: 0};
   }
- 
+
   render() {
     const isOpen = this.state.open;
     return (
@@ -18,7 +17,7 @@ class HotelRoom extends React.Component {
       <header className="App-header">
         <HotelMenu />
       </header>
-     <Recognise/>
+     <WebcamCapture />
      </>
     );
   }
