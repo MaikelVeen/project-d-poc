@@ -13,8 +13,7 @@ class QRScanner extends React.Component {
       width: 0,
       height: 0,
       Webcam: false,
-      error: "",
-    
+      error: ""
     };
   }
 
@@ -30,7 +29,8 @@ class QRScanner extends React.Component {
   handleError = err => {
     console.error(err);
     this.setState({
-      error: "QR code not recognized."})
+      error: "QR code not recognized."
+    });
   };
 
   render() {
@@ -48,7 +48,6 @@ class QRScanner extends React.Component {
             />
             <p>{this.state.error}</p>
           </div>
-          
         ) : (
           ""
         )}

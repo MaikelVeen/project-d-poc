@@ -3,13 +3,11 @@ import Webcam from "react-webcam";
 import "../App.css";
 import { LayersManager } from "react-layers-manager";
 import indicator from "../assets/indicator.png";
-import lodash from "lodash";
 
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
     this.state = { image: "", message: "" };
-
   }
 
   getInitialState() {
@@ -68,30 +66,29 @@ class TimedWebcamCapture extends React.Component {
     };
 
     return (
-        <>
-      <div>
-        <LayersManager>
-          <div style={{ zIndex: 1, position: "absolute" }} id="webcam">
-            <Webcam
-              audio={false}
-              ref={this.setRef}
-              screenshotFormat="image/jpeg"
-              videoConstraints={videoConstraints}
-              height="720"
-              width="1280"
-            />
+      <>
+        <div>
+          <LayersManager>
+            <div style={{ zIndex: 1, position: "absolute" }} id="webcam">
+              <Webcam
+                audio={false}
+                ref={this.setRef}
+                screenshotFormat="image/jpeg"
+                videoConstraints={videoConstraints}
+                height="720"
+                width="1280"
+              />
 
-            <img
-              id="indicator"
-              style={{ zIndex: 2, position: "absolute", top: 1 }}
-              src={indicator}
-            />
-          </div>
-        
-        </LayersManager>
-       
-      </div>
-       <div id ="text">{this.state.image}</div></>
+              <img
+                id="indicator"
+                style={{ zIndex: 2, position: "absolute", top: 1 }}
+                src={indicator}
+              />
+            </div>
+          </LayersManager>
+        </div>
+        <div id="text">{this.state.image}</div>
+      </>
     );
   }
 }

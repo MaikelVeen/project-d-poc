@@ -62,8 +62,8 @@ class WebcamCapture extends React.Component {
               ref={this.setRef}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
-              height = '720'
-              width = '1280'
+              height="720"
+              width="1280"
             />
 
             <img
