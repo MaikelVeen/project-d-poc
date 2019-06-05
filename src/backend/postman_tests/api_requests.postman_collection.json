@@ -43,6 +43,37 @@
 				"description": "Create a new guest in the database"
 			},
 			"response": []
+		},
+		{
+			"name": "Check QR code",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":\"6097fed738974d16889cf13df1b9\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/check/qr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"check",
+						"qr"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

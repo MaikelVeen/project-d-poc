@@ -126,6 +126,63 @@ Provide name, email and phone number
 
 **Code** : `400 BAD REQUEST`
 
+# Check a QR Code
+
+Checks if a given QR code corresponds to a valid user id in the database. On properly formed request the server should always return 200 OK. Use json field 'valid' to determine if user id is valid
+
+**URL** : `/check/qr`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**Data constraints**
+
+Provide id scanned in front end
+
+
+**Data example** All fields must be sent.
+
+```json
+{
+	"id":"6097fed738974d16889cf13df1b9"
+}
+```
+
+## Success Response
+
+**Condition** : If everything is OK 
+
+**Code** : `200 OK`
+
+**Content examples**
+
+```json
+{
+    "id": "6097fed738974d16889cf13df1b964f6",
+    "name": "John Doe",
+    "valid": true
+}
+
+{
+    "id": "6097fed738974d16889cf13df1b964",
+    "name": "",
+    "valid": false
+}
+```
+
+## Error Responses
+
+**Condition** : If fields are missed or body is not json
+
+**Code** : `400 BAD REQUEST`
+
+**Condition** : Internal server error
+
+**Code** : `500 INTERNAL SERVER ERROR`
+
 ---
 
 # Documentation Links
