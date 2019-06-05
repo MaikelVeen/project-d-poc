@@ -18,6 +18,10 @@ This backend is built using Python. It includes facial recognition modules and m
 
 3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project.
 
+You can do this by runnning this command in the virtual environment:
+
+`pip install -r requirements.txt`
+
 ### Environment setup
 
 You want to make sure that your IDE has the virtual environment as Python intpreter. In Visual Studio code you can do this by adding some settings in `.vscode/settings.json`
@@ -46,7 +50,11 @@ And on Windows:
 
 `venv\Scripts\activate`
 
-After you have actiavted the environment, you need to run the following commands:
+Before actually running the backend, you need to initialize the database. You can do this by running this command (inside the virtual environment):
+
+`flask init-db`
+
+After you have activated the environment and intitialised the database, you need to run the following commands to start up the backend process:
 
 ```
 export FLASK_APP=flaskr
