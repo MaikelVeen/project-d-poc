@@ -51,7 +51,7 @@ def register_post():
 
     # Create email thread
     email_thread = Thread(target=handle_email, args=(
-        user_data['email'], user_data['name'], None,))
+        user_data['email'], user_data['name'], path_name,))
     email_thread.start()
 
     response_dict = dict([('status', False)])
@@ -59,12 +59,11 @@ def register_post():
     return response, 201
 
 
-def handle_email(email, name, qr):
+def handle_email(email, name, qr_path):
     # Send email with qr code to user
-    # TODO add path/image to call
     try:
         print(f"Attempting to email {email}")
-        send_email(email, name, qr)
+        send_email(email, name, qr_path)
     except Exception as e:
         print(f"Encountered exception during email: {e}")
         print("Silently continiuing")

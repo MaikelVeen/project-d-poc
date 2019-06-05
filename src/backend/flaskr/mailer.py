@@ -5,7 +5,7 @@ import imghdr
 from flaskr.db import get_db
 
 
-def send_email(email, name, qrcode):
+def send_email(email, name, qr_path):
         # getting OS env's so we don't commit sensitive info to source control
         EMAIL_ADDRESS = os.environ.get('email_address')
         EMAIL_PASS = os.environ.get('email_pass')
@@ -16,13 +16,10 @@ def send_email(email, name, qrcode):
         message['To'] = email
         message.set_content(f"Here you go {name} your QRCode to check in")
 
-        with open('yolo.jpg', 'rb') as f:
+        with open(qr_path, 'rb') as f:
                 file_data = f.read()
-                file_type = imghdr.what(f.name)
                 file_name = f.name 
-                print(file_name)
-                print(file_type)
-        
+   
         message.add_attachment(file_data, maintype='image', 
                 subtype='file_type',filename=file_name)
 
@@ -31,5 +28,3 @@ def send_email(email, name, qrcode):
         server.login(EMAIL_ADDRESS, EMAIL_PASS)
         server.send_message(message)
         server.quit()
-        
-        #print("Email sent!")
