@@ -4,8 +4,11 @@ from flask import (
 from flaskr.db import get_db
 from flaskr.mailer import send_email
 from flask_expects_json import expects_json
+from pathlib import Path
+from threading import Thread
 import uuid
 import qrcode
+
 
 bp = Blueprint('register', __name__, url_prefix='/register')
 
@@ -29,20 +32,39 @@ def register_post():
 
     # Generate a unique user id as 32-character hexadecimal string
     user_id = uuid.uuid4().hex
-    user_data.update([('id', user_id)])
 
     db.execute(
         'INSERT INTO user (id, name, email, phone) VALUES (?, ?, ?, ?)',
-        (user_data['id'], user_data['name'],
+        (user_id, user_data['name'],
          user_data['email'], user_data['phone'])
     )
     db.commit()
 
-    # Temporary save the file to show it works
+    # Generate path name for qr image
+    data_folder = Path("images/")
+    path_name = data_folder / f"{user_id}.jpg"
+    Path("images/").mkdir(parents=False, exist_ok=True)
+
+    # Generate the qr code
     qr_img = qrcode.make(user_id)
-    qr_img.save(f"{user_id}.jpg")
-    send_email(user_data['email'], user_data['name'], qr_img)
+    qr_img.save(path_name)
+
+    # Create email thread
+    email_thread = Thread(target=handle_email, args=(
+        user_data['email'], user_data['name'], None,))
+    email_thread.start()
 
     response_dict = dict([('status', False)])
     response = jsonify(response_dict)
     return response, 201
+
+
+def handle_email(email, name, qr):
+    # Send email with qr code to user
+    # TODO add path/image to call
+    try:
+        print(f"Attempting to email {email}")
+        send_email(email, name, qr)
+    except Exception as e:
+        print(f"Encountered exception during email: {e}")
+        print("Silently continiuing")
