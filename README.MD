@@ -16,11 +16,7 @@ This backend is built using Python. It includes facial recognition modules and m
 
 2. Install Flask. Instructions can be found [here](http://flask.pocoo.org/docs/1.0/installation/#installation)
 
-3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project.
-
-You can do this by runnning this command in the virtual environment:
-
-`pip install -r requirements.txt`
+3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project. You can do this by runnning this command in the virtual environment: `pip install -r requirements.txt` Please note that this is a destructive operation and will also drop all tables if a database is already present.
 
 ### Environment setup
 
