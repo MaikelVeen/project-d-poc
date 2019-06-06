@@ -54,7 +54,7 @@ def register_post():
         user_data['email'], user_data['name'], path_name,))
     email_thread.start()
 
-    response_dict = dict([('status', False)])
+    response_dict = dict([('status', True)])
     response = jsonify(response_dict)
     return response, 201
 

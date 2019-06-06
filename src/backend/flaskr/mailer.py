@@ -11,10 +11,10 @@ def send_email(email, name, qr_path):
         EMAIL_PASS = os.environ.get('email_pass')
 
         message = EmailMessage()
-        message['Subject'] = f"Hi {name}"
+        message['Subject'] = f"Dear {name}, your registration code for awesome Hotel"
         message['From'] = "Hotel"
         message['To'] = email
-        message.set_content(f"Here you go {name} your QRCode to check in")
+        message.set_content(f"Dear {name} your QRCode to check in at the lobby")
 
         with open(qr_path, 'rb') as f:
                 file_data = f.read()
