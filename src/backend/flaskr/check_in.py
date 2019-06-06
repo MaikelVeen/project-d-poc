@@ -60,9 +60,16 @@ def send_image():
     path_name = data_folder / (f"{g.data['id']}.jpeg")
     status = False
 
+    db = get_db()
+
     try:
         with open(path_name, 'wb') as f:
             f.write(imgdata)
+
+        # Assign room to checked in user
+        db.execute('UPDATE userRoom SET hasFace = 1 WHERE user_id = ?',
+                   (g.data['id'],))
+        db.commit()
 
         status = True
         response_dict = dict([('valid', status)])
@@ -70,7 +77,7 @@ def send_image():
         return response, 200
 
     except Exception as e:
-        print(f"Encountered exception during email: {e}")
+        print(f"Encountered exception during image saving: {e}")
         response_dict = dict([('valid', status)])
         response = jsonify(response_dict)
         return response, 200
