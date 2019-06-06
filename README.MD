@@ -16,11 +16,7 @@ This backend is built using Python. It includes facial recognition modules and m
 
 2. Install Flask. Instructions can be found [here](http://flask.pocoo.org/docs/1.0/installation/#installation)
 
-3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project.
-
-You can do this by runnning this command in the virtual environment:
-
-`pip install -r requirements.txt`
+3. Install other dependencies for the project inside the virtual environment. These can be found in requirements.txt in the root folder of this project. You can do this by runnning this command in the virtual environment: `pip install -r requirements.txt` Please note that this is a destructive operation and will also drop all tables if a database is already present.
 
 ### Environment setup
 
@@ -125,6 +121,63 @@ Provide name, email and phone number
 **Condition** : If fields are missed or body is not json
 
 **Code** : `400 BAD REQUEST`
+
+# Check a QR Code
+
+Checks if a given QR code corresponds to a valid user id in the database. On properly formed request the server should always return 200 OK. Use json field 'valid' to determine if user id is valid
+
+**URL** : `/check/qr`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**Data constraints**
+
+Provide id scanned in front end
+
+
+**Data example** All fields must be sent.
+
+```json
+{
+	"id":"6097fed738974d16889cf13df1b9"
+}
+```
+
+## Success Response
+
+**Condition** : If everything is OK 
+
+**Code** : `200 OK`
+
+**Content examples**
+
+```json
+{
+    "id": "6097fed738974d16889cf13df1b964f6",
+    "name": "John Doe",
+    "valid": true
+}
+
+{
+    "id": "6097fed738974d16889cf13df1b964",
+    "name": "",
+    "valid": false
+}
+```
+
+## Error Responses
+
+**Condition** : If fields are missed or body is not json
+
+**Code** : `400 BAD REQUEST`
+
+**Condition** : Internal server error
+
+**Code** : `500 INTERNAL SERVER ERROR`
 
 ---
 

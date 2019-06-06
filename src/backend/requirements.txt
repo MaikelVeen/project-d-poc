@@ -2,5 +2,6 @@ flask-expects-json
 qrcode
 uuid
 pillow
+flask-cors
 pylint
 autopep8
