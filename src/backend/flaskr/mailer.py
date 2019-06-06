@@ -1,27 +1,30 @@
 import os
 import smtplib
-from email.message import EmailMessage
+from email.message import EmailMessage 
 import imghdr
 from flaskr.db import get_db
 
 
-def send_email(email, name, qr_code):
-    # getting OS env's so we don't commit sensitive info to source control
-    EMAIL_USER = os.environ.get('EMAIL_USER')
-    EMAIL_PASS = os.environ.get('EMAIL_PASSWORD')
+def send_email(email, name, qr_path):
+        # getting OS env's so we don't commit sensitive info to source control
+        EMAIL_ADDRESS = os.environ.get('email_address')
+        EMAIL_PASS = os.environ.get('email_pass')
 
-    message = EmailMessage()
-    message['Subject'] = f"Hi {name}, this is your registration QR Code for lobby checkin"
-    message['To'] = email
-    message.set_content("QR CODE should be here")
+        message = EmailMessage()
+        message['Subject'] = f"Dear {name}, your registration code for awesome Hotel"
+        message['From'] = "Hotel"
+        message['To'] = email
+        message.set_content(f"Dear {name} your QRCode to check in at the lobby")
 
-    # message.add_attachment(file_data, maintype='image',
-    #      subtype='file_type',filename=file_name)
+        with open(qr_path, 'rb') as f:
+                file_data = f.read()
+                file_name = f.name 
+   
+        message.add_attachment(file_data, maintype='image', 
+                subtype='file_type',filename=file_name)
 
-    # connecting to gmail smtp mail server
-    server = smtplib.SMTP_SSL('smtp.gmail.com:465')
-    server.login(EMAIL_USER, EMAIL_PASS)
-    server.send_message(message)
-    server.quit()
-
-    print(f"Email sent succesfully to {email}")
+        # connecting to gmail smtp mail server
+        server = smtplib.SMTP_SSL('smtp.gmail.com:465')
+        server.login(EMAIL_ADDRESS, EMAIL_PASS)
+        server.send_message(message)
+        server.quit()
