@@ -1,4 +1,5 @@
 import React from 'react';
+import {Layout} from '../Layout.js';
 // import {Link} from  'react-router-dom';
 import { 
   Segment,
@@ -45,7 +46,7 @@ export class Reservation extends React.Component {
       } = this.state
 
     return (
-      <div>
+      <Layout>
         <Segment 
         stacked
         // style = {{backgroundColor: 'transparent'}}
@@ -68,7 +69,7 @@ export class Reservation extends React.Component {
         <strong>onSubmit:</strong>
         <pre>{JSON.stringify({ submittedName, submittedEmail }, null, 2)}</pre> */}
 
-      </div>
+      </Layout>
     )
   }
 }

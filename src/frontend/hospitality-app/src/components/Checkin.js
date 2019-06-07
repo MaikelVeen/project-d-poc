@@ -1,4 +1,5 @@
 import React from 'react';
+import {Layout} from '../Layout.js';
 // import {Link} from  'react-router-dom';
 import WebcamCapture from './WebcamCapture'
 import { 
@@ -9,7 +10,7 @@ export class Checkin extends React.Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <Grid>
           <Grid.Row columns={2} centered>
             <Grid.Column>
@@ -20,7 +21,7 @@ export class Checkin extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </div>
+      </Layout>
     )
   }
 }

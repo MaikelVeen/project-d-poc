@@ -28,7 +28,8 @@ export class MainLayout extends React.Component {
     render () {
       const { dimmed, visible } = this.state
         return (
-          <div style = {{overflow:'hidden'}} >
+          // <div style = {{overflow:'hidden'}} >
+          <div>
             <MenuBar push = {this.handleMenuChange.bind(this)}/>
 
             <div style = {SideBarStyle}>
@@ -39,9 +40,9 @@ export class MainLayout extends React.Component {
                 />
                 <Sidebar.Pusher dimmed = {dimmed && visible} >
                   <div id = 'bg'>
-                    <Container style ={ContainerStyle}>
+                    {/* <Container style ={ContainerStyle}> */}
                       {this.props.children}
-                    </Container> 
+                    {/* </Container>  */}
                   </div>
                 </Sidebar.Pusher>
               </Sidebar.Pushable>
@@ -125,10 +126,4 @@ const SideBarStyle = {
   // minHeight: window.innerHeight - 64,
   // maxHeight: window.innerHeight - 64,
   marginTop:'4em',
-}
-
-const ContainerStyle = {
-  paddingTop:'10em', 
-  paddingBottom: '2em', 
-  minHeight: window.innerHeight - 64,
 }

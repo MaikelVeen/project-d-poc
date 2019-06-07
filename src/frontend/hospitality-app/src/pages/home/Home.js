@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../assets/background3.png';
+import logo from '../../assets/background3.png';
+import {Layout} from '../../Layout.js'
 import {Link} from  'react-router-dom';
 import { 
   Container,
@@ -15,7 +16,7 @@ export class Home extends React.Component {
   
     render() {
       return (
-        <div>
+        <Layout>
           
           <Segment
           inverted
@@ -24,7 +25,7 @@ export class Home extends React.Component {
             <Image src={logo} size='small'/>
             <HomepageHeading/>
           </Segment>
-        </div>
+        </Layout>
       );
     }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Layout} from '../Layout.js';
 import {Link} from  'react-router-dom';
 import { 
   Grid,
@@ -13,7 +14,7 @@ export class Lobby extends React.Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <Grid centered columns={4} relaxed='very'>
           <Grid.Row>
             <MainHeader/>
@@ -36,7 +37,7 @@ export class Lobby extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </div>
+      </Layout>
     )
   }
 }

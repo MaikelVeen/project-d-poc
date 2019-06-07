@@ -1,4 +1,5 @@
 import React from 'react';
+import {Layout} from '../Layout.js';
 import { Link } from 'react-router-dom';
 import {
     Segment,
@@ -38,7 +39,7 @@ export class ConfirmRegistration extends React.Component {
 
     render() {
         return (
-            <div>
+            <Layout>
                 <Segment style={{ backgroundColor: 'transparent' , minHeight:500}} >
                     <StepsBar />
                     <Divider />
@@ -55,7 +56,7 @@ export class ConfirmRegistration extends React.Component {
                         </Grid.Row>
                     </Grid>
                 </Segment>
-            </div>
+            </Layout>
         )
     }
 }
