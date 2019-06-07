@@ -1,9 +1,16 @@
 import React from 'react';
 import {Layout} from '../Layout.js';
-// import {Link} from  'react-router-dom';
-import WebcamCapture from './WebcamCapture'
+import {Link} from  'react-router-dom';
+// import WebcamCapture from './WebcamCapture'
+import QRScanner from './QRScanner.js';
 import { 
-  Grid
+  Grid,
+  Segment,
+  Header,
+  Icon,
+  Button,
+  Divider,
+  Container
 } from 'semantic-ui-react'
 
 export class Checkin extends React.Component {
@@ -14,10 +21,10 @@ export class Checkin extends React.Component {
         <Grid>
           <Grid.Row columns={2} centered>
             <Grid.Column>
-              TODO: Scan QR code
+              <SegmentBox/>           
             </Grid.Column>
             <Grid.Column>
-              <WebcamCapture/>
+              <QRScanner/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -25,3 +32,23 @@ export class Checkin extends React.Component {
     )
   }
 }
+
+const SegmentBox = () => (
+  <Container fluid textAlign='center'>
+    <Segment placeholder>
+      <Header icon as ='h2'>
+        <Icon name='qrcode' />
+        QR-code scanner
+      </Header>
+      <p>
+        Scan the QR-code you received in your mail.
+      </p>
+
+      <Divider horizontal>Or</Divider>
+
+      <Link to='/lobby'>
+        <Button color='red' content='Go back' icon='undo' labelPosition='left' />
+      </Link>
+  </Segment>
+  </Container>
+)
