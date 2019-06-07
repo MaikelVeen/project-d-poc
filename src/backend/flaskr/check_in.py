@@ -67,7 +67,7 @@ def send_image():
             f.write(imgdata)
 
         # Assign room to checked in user
-        db.execute('UPDATE userRoom SET hasFace = 1 WHERE user_id = ?',
+        db.execute('UPDATE user SET hasFace = 1 WHERE id = ?',
                    (g.data['id'],))
         db.commit()
 
