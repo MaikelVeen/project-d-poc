@@ -58,6 +58,7 @@ def send_image():
 
     data_folder = Path("images/user_faces/")
     path_name = data_folder / (f"{g.data['id']}.jpeg")
+    Path("images/user_faces").mkdir(parents=False, exist_ok=True)
     status = False
 
     db = get_db()
@@ -67,7 +68,7 @@ def send_image():
             f.write(imgdata)
 
         # Assign room to checked in user
-        db.execute('UPDATE userRoom SET hasFace = 1 WHERE user_id = ?',
+        db.execute('UPDATE user SET hasFace = 1 WHERE id = ?',
                    (g.data['id'],))
         db.commit()
 

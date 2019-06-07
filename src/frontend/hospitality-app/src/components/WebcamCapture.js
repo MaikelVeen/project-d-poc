@@ -28,7 +28,7 @@ class WebcamCapture extends React.Component {
     fetch('http://localhost:5000/check/image', {
       method: 'POST',
       body: JSON.stringify({
-        id: 'djdjdj',
+        id: this.state.id,
         image_string: this.state.image.slice(23)
       }),
       headers: { 'Content-Type': 'application/json' }
