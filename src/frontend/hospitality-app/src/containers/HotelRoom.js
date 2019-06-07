@@ -7,18 +7,32 @@ class HotelRoom extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { chosen: false , roomNumber: 0};
-    this.ChooseRoom = this.ChooseRoom.bind(this)
+    this.state = { chosen: false, roomNumber: 0, rooms: [1, 2, 3, 4, 5, 6] };
+    this.ChooseRoom = this.ChooseRoom.bind(this);
   }
 
-  //TODO 
-  // fetch available rooms
-  // map rooms
-  
+  // componentDidMount() {
+  //   this.request_rooms();
+  // }
 
+  // request_rooms = () => {
+  //   fetch("http://localhost:5000/check/rooms")
+  //   .then(
+  //     result => {
+  //       this.setState({
+  //        rooms: result,
+  //       });
+  //     },
+  //     error => {
+  //       this.setState({
+  //         message: error,
+  //       });
+  //     }
+  //   );
+  // };
 
-  ChooseRoom(e){
-    this.setState({chosen: true, roomNumber: e})
+  ChooseRoom(e) {
+    this.setState({ chosen: true, roomNumber: e });
   }
   render() {
     const Chosen = this.state.chosen;
@@ -27,10 +41,15 @@ class HotelRoom extends React.Component {
         <header className="App-header">
           <HotelMenu />
         </header>
-
-        {Chosen ? <TimedWebcamCapture roomNumber = {this.state.roomNumber}/> : 
-        
-        <a onClick={() => this.ChooseRoom(6)}> <Room number={6} /></a>}
+        {Chosen ? (
+          <TimedWebcamCapture roomNumber={this.state.roomNumber} />
+        ) : (
+          this.state.rooms.map(i => (
+            <a onClick={() => this.ChooseRoom(i)}>
+              <Room number={i} />
+            </a>
+          ))
+        )}
       </>
     );
   }
