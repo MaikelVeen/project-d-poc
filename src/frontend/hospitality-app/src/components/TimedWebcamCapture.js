@@ -16,7 +16,7 @@ class TimedWebcamCapture extends React.Component {
       function() {
         this.setState({ capture: true });
       }.bind(this),
-      1000
+      2000
     );
   }
 
@@ -46,7 +46,6 @@ class TimedWebcamCapture extends React.Component {
 
   //send post request to backend, after response set capture == true
   send_request = () => {
-    console.log(this.state.image);
     fetch("http://localhost:5000/check/image", {
       method: "POST",
       body: JSON.stringify({
@@ -98,7 +97,7 @@ class TimedWebcamCapture extends React.Component {
             </div>
           </LayersManager>
         </div>
-        <div id="text">{this.state.image}</div>
+       
       </>
     );
   }

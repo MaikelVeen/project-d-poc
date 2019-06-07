@@ -64,3 +64,13 @@
   justify-content: end;
  height: 100vh;
 }
+
+#Room{
+  height: 20vh;
+  width: 50vh;
+  border-style: solid;
+  border-width: 5px;
+  padding-top: 12.5vh;
+  text-align: center;
+  color: #7c795d; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0;
+}
