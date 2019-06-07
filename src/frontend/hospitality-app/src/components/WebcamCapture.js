@@ -73,7 +73,7 @@ class WebcamCapture extends React.Component {
             />
           </div>
           <button
-            style={{ zIndex: 2, position: 'absolute' }}
+            style={{ zIndex: 3, position: 'absolute' }}
             onClick={this.capture}
           >
             Capture photo

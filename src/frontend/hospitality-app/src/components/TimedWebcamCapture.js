@@ -7,19 +7,16 @@ import indicator from "../assets/indicator.png";
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { image: "", message: "" };
+    this.state = { image: "", message: "",  fetch: true };
   }
 
-  getInitialState() {
-    return { elapsed: 0 };
-  }
 
   componentDidMount() {
-    this.timer = setInterval(this.capture, 5000);
+   if (this.state.fetch == true){this.capture()}
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    
   }
 
   setRef = webcam => {
@@ -27,10 +24,12 @@ class TimedWebcamCapture extends React.Component {
   };
 
   capture = () => {
+    
     const imageSource = this.webcam.getScreenshot();
     this.setState(
       {
-        image: imageSource
+        image: imageSource,
+        fetch: false
       },
       () => this.send_request()
     );
@@ -47,7 +46,9 @@ class TimedWebcamCapture extends React.Component {
     }).then(
       result => {
         this.setState({
-          message: result
+          message: result,
+          fetch: true
+
         });
       },
       error => {

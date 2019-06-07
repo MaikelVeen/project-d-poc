@@ -11,7 +11,6 @@ class HotelRoom extends React.Component {
   }
 
   render() {
-    const isOpen = this.state.open;
     return (
      <>
       <header className="App-header">
