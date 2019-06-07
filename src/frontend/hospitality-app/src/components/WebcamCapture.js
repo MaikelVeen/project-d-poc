@@ -1,13 +1,13 @@
-import React from "react";
-import Webcam from "react-webcam";
-import "../App.css";
-import { LayersManager } from "react-layers-manager";
-import indicator from "../assets/indicator.png";
+import React from 'react';
+import Webcam from 'react-webcam';
+import '../App.css';
+import { LayersManager } from 'react-layers-manager';
+import indicator from '../assets/indicator.png';
 
 class WebcamCapture extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { image: "", message: "" };
+    this.state = { image: '', message: '', id: props.id };
   }
 
   setRef = webcam => {
@@ -25,13 +25,13 @@ class WebcamCapture extends React.Component {
   };
 
   send_request = () => {
-    fetch("http://localhost:5000/check/image", {
-      method: "POST",
+    fetch('http://localhost:5000/check/image', {
+      method: 'POST',
       body: JSON.stringify({
-        id: "djdjdj",
+        id: 'djdjdj',
         image_string: this.state.image.slice(23)
       }),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     }).then(
       result => {
         this.setState({
@@ -50,13 +50,13 @@ class WebcamCapture extends React.Component {
     const videoConstraints = {
       width: 1280,
       height: 720,
-      facingMode: "user"
+      facingMode: 'user'
     };
 
     return (
       <div>
         <LayersManager>
-          <div style={{ zIndex: 1, position: "absolute" }} id="webcam">
+          <div style={{ zIndex: 1, position: 'absolute' }} id="webcam">
             <Webcam
               audio={false}
               ref={this.setRef}
@@ -68,12 +68,12 @@ class WebcamCapture extends React.Component {
 
             <img
               id="indicator"
-              style={{ zIndex: 2, position: "absolute", top: 1 }}
+              style={{ zIndex: 2, position: 'absolute', top: 1 }}
               src={indicator}
             />
           </div>
           <button
-            style={{ zIndex: 2, position: "absolute" }}
+            style={{ zIndex: 2, position: 'absolute' }}
             onClick={this.capture}
           >
             Capture photo
