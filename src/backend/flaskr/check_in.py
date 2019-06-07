@@ -58,6 +58,7 @@ def send_image():
 
     data_folder = Path("images/user_faces/")
     path_name = data_folder / (f"{g.data['id']}.jpeg")
+    Path("images/user_faces").mkdir(parents=False, exist_ok=True)
     status = False
 
     db = get_db()
