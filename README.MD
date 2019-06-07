@@ -34,6 +34,30 @@ Add the following lines to this file:
 }
 ```
 
+
+###email setup
+
+To get QRCode's send to you via email there are a few steps you have to undertake before it will actually send emails to you.
+First of all you need a Gmail account. If you don't have a gmail account you need to make one. 
+
+After that, you need to go to this link: https://myaccount.google.com/lesssecureapps and allow "Less secure apps" to log in to your gmail account. If you don't do this it will not work.
+If you have 2-step verification enabled you need to go to this address: https://myaccount.google.com/apppasswords (This address only works if you have 2-step enabled) and create an app passowrd for the
+machine you work on. In this case you need to select "Mail" in the "Select app" drop down menu and select your device in the "Select device" drop down menu. After that you click "Generate", make sure to write this password down because you CAN NOT view this password again after you click done.
+
+After all this you need to make two OS variables one called "email_address" and the other called "email_pass". The address value should contain your gmail address and your password should contain either your real password for your account or in the case of 2-step verification, the generated password that you wrote down. When this is done you need to reboot your machine for your OS to load the variables.
+(Atleast in the case of windows)
+
+Windows OS variables: https://helpdeskgeek.com/how-to/create-custom-environment-variables-in-windows/
+Mac OS variables: https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255
+
+If every step has been walked through properly you should be able to use the mail module.
+
+Why we do this:
+    
+    We do this because its a good practice to store sensitive data outside of the view of source control and of course, it's not wise to have passwords in plaintext in your files.
+
+That concludes the email setup
+
 ### Running the backend
 
 The backend dependencies and framework (Flask) are installed within an virtual environment. You can learn more about packages, pip and virtual environments [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
