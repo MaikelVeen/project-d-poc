@@ -28,9 +28,11 @@ def create_app(test_config=None):
     from . import register
     from . import check_in
     from . import recog
+    from . import door
 
     app.register_blueprint(register.bp)
     app.register_blueprint(check_in.bp)
     app.register_blueprint(recog.bp)
+    app.register_blueprint(door.bp)
 
     return app
