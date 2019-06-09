@@ -1,6 +1,5 @@
 import React from 'react';
 import {Layout} from '../Layout.js';
-// import {Link} from  'react-router-dom';
 import { 
   Segment,
   Form,
@@ -20,7 +19,7 @@ export class Reservation extends React.Component {
       firstName: data === null ? '' : data.data.firstName,
       lastName: data === null ? '' : data.data.lastName,
       tel: data === null ? '' : data.data.tel,
-      email: data === null ? '' : data.data.email,
+      email: data === null ? '' : data.data.email
     }
   }
 
@@ -28,7 +27,7 @@ export class Reservation extends React.Component {
 
   handleSubmit = () => {
     this.props.history.push(
-      '/confirm-registration', 
+      '/register-face', 
       { 
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -48,7 +47,7 @@ export class Reservation extends React.Component {
     return (
       <Layout>
         <Segment 
-        stacked
+          stacked
         // style = {{backgroundColor: 'transparent'}}
         >
           <StepsBar/>
@@ -131,6 +130,14 @@ const StepsBar = () => (
         <Step.Content>
           <Step.Title>Personal Information</Step.Title>
           <Step.Description>Enter personal information</Step.Description>
+        </Step.Content>
+      </Step>
+
+      <Step disabled>
+        <Icon name='camera' />
+        <Step.Content>
+          <Step.Title>Scan your face</Step.Title>
+          <Step.Description>Scan your face for keyless entry</Step.Description>
         </Step.Content>
       </Step>
 

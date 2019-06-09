@@ -4,8 +4,7 @@ import { Container } from 'semantic-ui-react'
 export const Layout = ({children}) => {
     const sx = {
         paddingTop:'10em', 
-        paddingBottom: '2em', 
-        minHeight: '100vh'
+        paddingBottom: '2em',
     };
     
     return (

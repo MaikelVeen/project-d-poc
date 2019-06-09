@@ -17,12 +17,14 @@ export class Home extends React.Component {
     render() {
       return (
         <Layout>
-          
           <Segment
-          inverted
-          style={{ minHeight: 400 }}
+            inverted
+            style={{ minHeight: 400 }}
           >
-            <Image src={logo} size='small'/>
+            <Image 
+              src={logo} 
+              size='small'
+            />
             <HomepageHeading/>
           </Segment>
         </Layout>
@@ -67,7 +69,7 @@ const HomepageHeading = () => {
 const ButtonMultipleDemo = () => {
   return (
     <div style = {{textAlign:'center'}}>
-      <Link to='/reservation'>
+      <Link to='/online'>
         <Button basic inverted color='red'>
           <Icon name='computer' /> Reservation
         </Button>

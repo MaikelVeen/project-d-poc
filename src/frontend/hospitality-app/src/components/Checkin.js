@@ -1,7 +1,6 @@
 import React from 'react';
 import {Layout} from '../Layout.js';
 import {Link} from  'react-router-dom';
-// import WebcamCapture from './WebcamCapture'
 import QRScanner from './QRScanner.js';
 import { 
   Grid,
@@ -14,14 +13,13 @@ import {
 } from 'semantic-ui-react'
 
 export class Checkin extends React.Component {
-
   render() {
     return (
       <Layout>
         <Grid>
           <Grid.Row columns={2} centered>
             <Grid.Column>
-              <SegmentBox/>           
+              <SegmentBox/>
             </Grid.Column>
             <Grid.Column>
               <QRScanner/>
@@ -43,12 +41,10 @@ const SegmentBox = () => (
       <p>
         Scan the QR-code you received in your mail.
       </p>
-
       <Divider horizontal>Or</Divider>
-
       <Link to='/lobby'>
         <Button color='red' content='Go back' icon='undo' labelPosition='left' />
       </Link>
-  </Segment>
+    </Segment>
   </Container>
 )

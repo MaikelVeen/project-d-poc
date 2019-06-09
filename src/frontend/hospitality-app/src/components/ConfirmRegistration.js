@@ -19,35 +19,35 @@ export class ConfirmRegistration extends React.Component {
         super(props);
         let prevData = props.history.location.state;
         this.state = {
-            data: prevData
+            data: prevData.photo === true ? prevData.data : prevData,
+            extraStep: prevData.photo === true ? true : false
         };
         console.log(prevData)
     }
 
-    handleSubmit = () => {
-        this.props.history.push(
-          '/reservation', 
-          {
-              data: this.state.data
-        //   firstName: this.state.data.firstName,
-        //   lastName: this.state.data.lastName,
-        //   tel: this.state.data.tel,
-        //   email: this.state.data.email
-            }
-        )
+    handleEdit = () => {
+        this.state.extraStep ? 
+            this.props.history.push(
+                '/reservation', 
+                { data: this.state.data
+                }) :
+            this.props.history.push(
+                '/online', { 
+                data: this.state.data
+            })
       }
 
     render() {
         return (
             <Layout>
                 <Segment style={{ backgroundColor: 'transparent' , minHeight:500}} >
-                    <StepsBar />
+                    <StepsBar extraStep = {this.state.extraStep}/>
                     <Divider />
                     <Grid columns={3} stackable textAlign='center' centered style = {{marginTop:'3em'}}>
                         <Grid.Row verticalAlign='middle'>
                             <Grid.Column>
                                 {/* TODO: create user in the database */}
-                                <Approve handle={this.handleSubmit.bind(this)}/>
+                                <Approve edit={this.handleEdit.bind(this)}/>
                             </Grid.Column>
 
                             <Grid.Column>
@@ -61,7 +61,7 @@ export class ConfirmRegistration extends React.Component {
     }
 }
 
-const StepsBar = () => (
+const StepsBar = props => (
     <div style={{ margin: '0 0 2em 0' }}>
         <Step.Group stackable='tablet'>
             <Step disabled>
@@ -71,6 +71,16 @@ const StepsBar = () => (
                     <Step.Description>Enter personal information</Step.Description>
                 </Step.Content>
             </Step>
+
+            
+            {props.extraStep ?
+            <Step disabled>
+                <Icon name='camera' />
+                <Step.Content>
+                    <Step.Title>Scan your face</Step.Title>
+                    <Step.Description>Scan your face for keyless entry</Step.Description>
+                </Step.Content>
+            </Step> : null }
 
             <Step active>
                 <Icon name='info circle' />
@@ -127,12 +137,6 @@ const OverviewCard = props => (
                                 </List.Description>
                             </List.Content>
                         </List.Item>
-                        {/* <List.Item>
-                            <Label color='red' horizontal>
-                            <Icon name='phone' /> Call 
-                            </Label>
-                            {props.data.tel}
-                        </List.Item>     */}
                     </List>
                 </Card.Content>
             </Card>
@@ -160,14 +164,10 @@ const Approve = props => (
                 </Button>
             </Link>
             <Divider horizontal>Or</Divider>
-            {/* TODO: OnClick method to edit*/}
-            {/* <Link link to='/'> */}
-                <Button animated='fade' color='red' onClick={props.handle}>
-                    <Button.Content visible color><Icon name='signup' /> Edit</Button.Content>
-                    <Button.Content hidden>Change</Button.Content>
-                </Button>
-            {/* </Link> */}
-
+            <Button animated='fade' color='red' onClick={props.edit}>
+                <Button.Content visible color><Icon name='signup' /> Edit</Button.Content>
+                <Button.Content hidden>Change</Button.Content>
+            </Button>
         </Segment>
     </div>
 )

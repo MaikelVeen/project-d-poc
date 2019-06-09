@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout} from '../Layout.js';
+import {Layout} from '../../Layout.js'
 import {Link} from  'react-router-dom';
 import { 
   Grid,
@@ -23,14 +23,12 @@ export class Lobby extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Segment 
-              // basic color='green' inverted tertiary raised
               >
                 <WithReservation/>
               </Segment>
             </Grid.Column>
             <Grid.Column>
               <Segment 
-              // color='blue' inverted tertiary raised
               >
                 <WithoutReservation/>
               </Segment>
@@ -59,16 +57,30 @@ const WithReservation = () => {
     <Link link to='/check-in'>
       <Card raised>
         <Card.Content>
-          <Card.Header>With reservation</Card.Header>
+          <Card.Header>
+            With reservation
+          </Card.Header>
           <Card.Meta>
             <span>Pre-booked</span>
           </Card.Meta>
         </Card.Content>
-        <Card.Content description = {description} style = {CardStyle}/>
+        <Card.Content 
+          description = {description} 
+          style = {CardStyle}
+        />
         <Card.Content extra>
-          <Button animated basic color='green' fluid>
-        <Button.Content visible>Check-in</Button.Content>
-        <Button.Content hidden>Enter</Button.Content>
+          <Button 
+            animated 
+            basic 
+            color='green' 
+            fluid
+          >
+        <Button.Content visible>
+          Check-in
+        </Button.Content>
+        <Button.Content hidden>
+          Enter
+        </Button.Content>
       </Button>
         </Card.Content>
       </Card>
@@ -80,16 +92,30 @@ const WithoutReservation = () => {
     <Link link to='/reservation'>
       <Card raised>
         <Card.Content>
-          <Card.Header>Without reservation</Card.Header>
+          <Card.Header>
+            Without reservation
+          </Card.Header>
           <Card.Meta>
             <span>Walk-in guest</span>
           </Card.Meta>
         </Card.Content>
-        <Card.Content description = {description} style = {CardStyle}/>
+        <Card.Content 
+          description = {description} 
+          style = {CardStyle}
+        />
         <Card.Content extra>
-          <Button animated basic color='blue' fluid>
-        <Button.Content visible>Register</Button.Content>
-        <Button.Content hidden>Enter</Button.Content>
+          <Button 
+            animated 
+            basic 
+            color='blue' 
+            fluid
+          >
+        <Button.Content visible>
+          Register
+        </Button.Content>
+        <Button.Content hidden>
+          Enter
+        </Button.Content>
       </Button>
         </Card.Content>
       </Card>
