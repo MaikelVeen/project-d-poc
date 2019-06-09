@@ -3,3 +3,6 @@ qrcode
 uuid
 pillow
 flask-cors
+pylint
+autopep8
+boto3

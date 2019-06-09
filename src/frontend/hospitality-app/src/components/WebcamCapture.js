@@ -1,15 +1,19 @@
 import React from 'react';
 import Webcam from 'react-webcam';
 import indicator from '../assets/indicator.png';
+<<<<<<< HEAD
 import image from '../assets/image.png';
 import {
   Container,
   Button
 } from 'semantic-ui-react';
+=======
+>>>>>>> master
 
 class WebcamCapture extends React.Component {
   constructor(props) {
     super(props);
+<<<<<<< HEAD
     console.log(props)
     this.state = { 
       image: '', 
@@ -17,6 +21,9 @@ class WebcamCapture extends React.Component {
       height: window.innerHeight,
       width: window.innerWidth,
     };
+=======
+    this.state = { image: '', message: '', id: props.id };
+>>>>>>> master
   }
 
   setRef = webcam => {
@@ -37,10 +44,10 @@ class WebcamCapture extends React.Component {
     fetch('http://localhost:5000/check/image', {
       method: 'POST',
       body: JSON.stringify({
-        id: 'djdjdj',
+        id: this.state.id,
         image_string: this.state.image.slice(23)
       }),
-      headers: { 'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     }).then(
       result => {
         this.setState({
@@ -63,6 +70,7 @@ class WebcamCapture extends React.Component {
     }; 
 
     return (
+<<<<<<< HEAD
       <div 
       style = {{
         // backgroundColor:'black'
@@ -166,6 +174,33 @@ class WebcamCapture extends React.Component {
             } 
           </div>
         </Container>
+=======
+      <div>
+        <LayersManager>
+          <div style={{ zIndex: 1, position: 'absolute' }} id="webcam">
+            <Webcam
+              audio={false}
+              ref={this.setRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+              height="720"
+              width="1280"
+            />
+
+            <img
+              id="indicator"
+              style={{ zIndex: 2, position: 'absolute', top: 1 }}
+              src={indicator}
+            />
+          </div>
+          <button
+            style={{ zIndex: 2, position: 'absolute' }}
+            onClick={this.capture}
+          >
+            Capture photo
+          </button>
+        </LayersManager>
+>>>>>>> master
       </div>
     );
   }
