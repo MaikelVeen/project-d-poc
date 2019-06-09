@@ -68,7 +68,7 @@ flask run
 
 ## Frontend 
 
-TO run a ReactJs application you need NodeJS. 
+To run a ReactJs application you need NodeJS. 
 Download NodeJs here: https://nodejs.org/en/
 
 NodeJs comes with npm a package manager which is needed to use ReactJs.
