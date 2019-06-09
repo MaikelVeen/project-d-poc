@@ -1,0 +1,10 @@
+#bg {
+    /* Image Path */
+    background-image: url("assets/background2.jpg");
+
+    /* Position Image */
+    height: calc(100vh - 4em); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

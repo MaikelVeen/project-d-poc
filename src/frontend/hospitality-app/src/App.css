@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
   min-height: 100vh;
 }
@@ -60,7 +60,20 @@
 }
 #text {
   display: flex;
+<<<<<<< HEAD
+  align-items:center;
+  justify-content: center;
+  z-index: 2;
+  height: 720px;
+  width: 1280px;
+  position: relative;
+  top: 15px;
+  left: 20px;
+  margin: 65px 0px 0px 50px;
+} */
+=======
   align-items:flex-end;
   justify-content: end;
  height: 100vh;
 }
+>>>>>>> master
