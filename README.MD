@@ -68,7 +68,18 @@ flask run
 
 ## Frontend 
 
-TODO
+TO run a ReactJs application you need NodeJS. 
+Download NodeJs here: https://nodejs.org/en/
+
+NodeJs comes with npm a package manager which is needed to use ReactJs.
+
+After you installed Node you need to run the following commands in the hospitallity-app folder: 
+
+```
+npm install 
+npm start
+```
+
 
 ---
 # API Documentation
