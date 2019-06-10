@@ -2,7 +2,7 @@ from flask import (
     Blueprint, flash, g, jsonify
 )
 from flaskr.db import get_db
-from flaskr.mailer import send_email
+from mailer import send_email
 from flask_expects_json import expects_json
 from pathlib import Path
 from threading import Thread
