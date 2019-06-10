@@ -1,11 +1,14 @@
 import React from 'react';
 import {Layout} from '../Layout.js';
+import {Link} from  'react-router-dom';
+
 import { 
   Segment,
   Form,
   Step,
   Icon,
-  Divider
+  Divider,
+  Button
 } from 'semantic-ui-react';
 
 
@@ -115,12 +118,32 @@ const ReservationForm = props => (
       />
     </Form.Group>
 
-    <div style = {{marginTop: '2em'}}>
-      <Form.Button content='Submit'/>
+    <div 
+      style = {{
+        marginTop: '2em',
+        // justifyContent:'center', 
+        // display:'flex' 
+      }}>
+      <Button.Group>
+        <Link to ='/lobby'>
+          <Button animated color='red'>
+            <Button.Content visible>Cancel</Button.Content>
+            <Button.Content hidden>
+              <Icon name='arrow left' />
+            </Button.Content>
+          </Button>
+        </Link>
+        <Button.Or />
+        <Button animated primary>
+            <Button.Content visible>Submit</Button.Content>
+            <Button.Content hidden>
+              <Icon name='arrow right' />
+            </Button.Content>
+          </Button>
+      </Button.Group>
     </div>
   </Form>
 )
-
 
 const StepsBar = () => (
   <div style = {{margin: '0 0 2em 0'}}>

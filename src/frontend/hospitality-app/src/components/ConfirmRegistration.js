@@ -1,6 +1,5 @@
 import React from 'react';
 import {Layout} from '../Layout.js';
-import { Link } from 'react-router-dom';
 import {
     Segment,
     Step,
@@ -11,7 +10,9 @@ import {
     Grid,
     List,
     Button,
-    Header
+    Header,
+    Dimmer, 
+    Loader,
 } from 'semantic-ui-react';
 
 export class ConfirmRegistration extends React.Component {
@@ -20,7 +21,9 @@ export class ConfirmRegistration extends React.Component {
         let prevData = props.history.location.state;
         this.state = {
             data: prevData.photo === true ? prevData.data : prevData,
-            extraStep: prevData.photo === true ? true : false
+            extraStep: prevData.photo === true ? true : false,
+            loaded: false,
+            register: false
         };
         console.log(prevData)
     }
@@ -37,17 +40,73 @@ export class ConfirmRegistration extends React.Component {
             })
       }
 
+    handleSubmit = () => {
+        this.setState({loaded: true})
+
+        let bodyData = JSON.stringify({
+            name: this.state.data.firstName + " " + this.state.data.lastName,
+            email: this.state.data.email,
+            phone: this.state.data.tel
+        })
+        fetch('http://localhost:5000/register/post', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: bodyData
+        }).then(response => {
+            if (response.ok) {
+                this.setState({register: true})
+            }
+            else {
+                this.setState({loaded: false})
+                alert('Error! Registration did not succeed. Please check your personal information.')
+            }
+        })
+
+    }
+
+    handleRegistration = () => {
+        this.state.extraStep ? 
+            this.props.history.push('/lobby')
+            :
+            this.props.history.push('/')
+    }
+
     render() {
         return (
             <Layout>
                 <Segment style={{ backgroundColor: 'transparent' , minHeight:500}} >
+                    <Dimmer bl active={this.state.loaded}>
+                        {this.state.register ? 
+                            <div>
+                                <Segment inverted>
+                                    <Header content='Status'/>
+                                    Your registration was successful. 
+                                </Segment>
+                                <Button animated onClick={this.handleRegistration.bind(this)}>
+                                    <Button.Content visible>Next</Button.Content>
+                                    <Button.Content hidden>
+                                        <Icon name='arrow right' />
+                                    </Button.Content>
+                                </Button>
+                            </div>
+                            :
+                            <Loader indeterminate>Preparing Registration</Loader>
+                        }
+                    </Dimmer>
+                    
                     <StepsBar extraStep = {this.state.extraStep}/>
                     <Divider />
                     <Grid columns={3} stackable textAlign='center' centered style = {{marginTop:'3em'}}>
                         <Grid.Row verticalAlign='middle'>
                             <Grid.Column>
                                 {/* TODO: create user in the database */}
-                                <Approve edit={this.handleEdit.bind(this)}/>
+                                <Approve 
+                                edit={this.handleEdit.bind(this)}
+                                handle={this.handleSubmit.bind(this)}
+                                />
                             </Grid.Column>
 
                             <Grid.Column>
@@ -157,12 +216,12 @@ const Approve = props => (
             </Header>
 
             {/* TODO: OnClick method to post*/}
-            <Link link to='/'>
-                <Button animated='fade' color='blue'>
+            {/* <Link link to='/'> */}
+                <Button animated='fade' color='blue' onClick={props.handle}>
                     <Button.Content visible color><Icon name='signup' /> Register</Button.Content>
                     <Button.Content hidden>Confirm</Button.Content>
                 </Button>
-            </Link>
+            {/* </Link> */}
             <Divider horizontal>Or</Divider>
             <Button animated='fade' color='red' onClick={props.edit}>
                 <Button.Content visible color><Icon name='signup' /> Edit</Button.Content>

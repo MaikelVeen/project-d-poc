@@ -117,7 +117,7 @@ const ReservationForm = props => (
       </Form.Group>
   
       <div style = {{marginTop: '2em'}}>
-        <Form.Button content='Submit'/>
+        <Form.Button content='Submit' color='blue'/>
       </div>
     </Form>
   )
