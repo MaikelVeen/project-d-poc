@@ -60,7 +60,6 @@
 }
 #text {
   display: flex;
-<<<<<<< HEAD
   align-items:center;
   justify-content: center;
   z-index: 2;
@@ -71,9 +70,3 @@
   left: 20px;
   margin: 65px 0px 0px 50px;
 } */
-=======
-  align-items:flex-end;
-  justify-content: end;
- height: 100vh;
-}
->>>>>>> master

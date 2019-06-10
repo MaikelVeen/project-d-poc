@@ -78,11 +78,7 @@ class QRScanner extends React.Component {
               delay={300}
               onError={this.handleError}
               onScan={this.handleScan}
-<<<<<<< HEAD
               style={{ height: '100%', width: '100%' }}
-=======
-              style={{ height: '100vh', width: '100vh' }}
->>>>>>> master
             />
             <p>{this.state.error}</p>
           </div>
