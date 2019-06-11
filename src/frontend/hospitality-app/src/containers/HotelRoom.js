@@ -11,25 +11,25 @@ class HotelRoom extends React.Component {
     this.ChooseRoom = this.ChooseRoom.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.request_rooms();
-  // }
+  componentDidMount() {
+    this.request_rooms();
+  }
 
-  // request_rooms = () => {
-  //   fetch("http://localhost:5000/check/rooms")
-  //   .then(
-  //     result => {
-  //       this.setState({
-  //        rooms: result,
-  //       });
-  //     },
-  //     error => {
-  //       this.setState({
-  //         message: error,
-  //       });
-  //     }
-  //   );
-  // };
+  request_rooms = () => {
+    fetch("http://localhost:5000/door/numbers")
+    .then(
+      result => {
+        this.setState({
+         rooms: result,
+        });
+      },
+      error => {
+        this.setState({
+          message: error,
+        });
+      }
+    );
+  };
 
   ChooseRoom(e) {
     this.setState({ chosen: true, roomNumber: e });
