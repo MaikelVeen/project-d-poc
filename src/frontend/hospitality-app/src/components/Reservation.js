@@ -11,7 +11,6 @@ import {
   Button
 } from 'semantic-ui-react';
 
-
 export class Reservation extends React.Component {
   constructor(props){
     super(props);

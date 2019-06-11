@@ -1,10 +1,19 @@
 import React from 'react';
+import {Link} from  'react-router-dom';
 import QrReader from 'react-qr-reader';
-import '../App.css';
-
+import indicator from '../assets/indicator.png';
 import WebcamCapture from './WebcamCapture';
+import { 
+  Grid,
+  Segment,
+  Header,
+  Icon,
+  Button,
+  Divider,
+  Container
+} from 'semantic-ui-react'
 
-class QRScanner extends React.Component {
+export class QRScanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,29 +80,83 @@ class QRScanner extends React.Component {
     const webcamEnabled = this.state.webcamEnabled;
 
     return (
-      <div>
+    <Grid>
+      <Grid.Row columns={2} centered>
+        <Grid.Column>
+          <SegmentBox handle = {scannerEnabled}/>
+        </Grid.Column>
+        <Grid.Column>
         {scannerEnabled ? (
-          <div id="QRscanner">
-            <QrReader
-              delay={300}
-              onError={this.handleError}
-              onScan={this.handleScan}
-              style={{ height: '100%', width: '100%' }}
+          <div>
+              <QrReader
+                delay={300}
+                onError={this.handleError}
+                onScan={this.handleScan}
+                style={{ 
+                  height: '100%', 
+                  width: '100%', 
+                  transform: 'rotateY(180deg)',
+                  zIndex: 0,
+                  position:'absolute',
+                }}
+              />
+              <p>{this.state.error}</p>
+
+            <img
+              src={indicator}
+              alt=''
+              style={{ 
+                zIndex: 2, 
+                position: 'absolute',
+                marginLeft:'25%',
+                marginTop:'10%',
+                width: '300px'
+                }
+              }
             />
-            <p>{this.state.error}</p>
           </div>
         ) : (
           ''
         )}
         {webcamEnabled ? (
           <div>
-            <WebcamCapture id={this.state.scannedData}/>
+            <WebcamCapture id={this.state.scannedData} online = {true}/>
           </div>
         ) : (
           ''
         )}
-      </div>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
     );
   }
 }
-export default QRScanner;
+
+
+const SegmentBox = props => (
+  <Container fluid textAlign='center'>
+    <Segment placeholder>
+      <Header icon as ='h2'>
+        {props.handle ? <Icon name='qrcode' /> : <Icon name='user circle outline' />}
+        {props.handle ? 'QR-code scanner' : 'Face scanner'}
+      </Header>
+      {props.handle ? 
+        <p>Scan the QR-code you received in your mail.</p> :
+        <div>
+          <p>Place your face in front of the camera.</p>
+          <br/><br/>
+          {/* <Button animated='fade' primary>
+            <Button.Content visible>Capture picture</Button.Content>
+            <Button.Content hidden>
+              <Icon name = 'camera'/> Save
+            </Button.Content>
+          </Button> */}
+        </div>
+      }
+      <Divider horizontal>Or</Divider>
+      <Link to='/lobby'>
+        <Button color='red' content='Go back' icon='undo' labelPosition='left' />
+      </Link>
+    </Segment>
+  </Container>
+)

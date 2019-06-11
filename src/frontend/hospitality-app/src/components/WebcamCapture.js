@@ -1,10 +1,10 @@
 import React from 'react';
 import Webcam from 'react-webcam';
 import indicator from '../assets/indicator.png';
-import image from '../assets/image.png';
 import {
   Container,
-  Button
+  Button,
+  Icon
 } from 'semantic-ui-react';
 
 class WebcamCapture extends React.Component {
@@ -12,6 +12,7 @@ class WebcamCapture extends React.Component {
     super(props);
     console.log(props)
     this.state = { 
+      id: props.id,
       image: '', 
       message: '',
       height: window.innerHeight,
@@ -57,8 +58,8 @@ class WebcamCapture extends React.Component {
 
   render() {
     const videoConstraints = {
-      width: this.props.online ? this.state.width : '100%',
-      height: this.props.online ? this.state.height : '100%',
+      width: '100%',
+      height: '100%',
       facingMode: 'user'
     }; 
 
@@ -69,17 +70,10 @@ class WebcamCapture extends React.Component {
       }}
       >
         <Container>
-          <div 
-            style={!this.props.online ? null :{
-              display: 'flex',  
-              justifyContent:'center', 
-              alignItems:'center', 
-              height: '100vh'
-            }}
-          >
+          <div >
             <div 
               style = {{
-                zIndex: '0',
+                zIndex: 0,
                 position:'absolute'
               }}
             >
@@ -91,8 +85,9 @@ class WebcamCapture extends React.Component {
                 style = { 
                   this.props.online ?{
                     transform: 'rotateY(180deg)',
-                    minHeight: this.state.height,
-                    minWidth:  this.state.width,
+                    height: '100%', 
+                    width: '100%',
+                    marginLeft: '3.5%',
                   } : {
                     transform: 'rotateY(180deg)',
                     height: '90%', 
@@ -104,36 +99,15 @@ class WebcamCapture extends React.Component {
               />
             </div>
 
-            {/* <img
-              src={image}
-              alt =''
-              style={
-                this.props.online ? 
-                { 
-                  zIndex: 1, 
-                  position: 'absolute',
-                  minHeight: window.innerHeight,
-                  minWidth:window.innerWidth
-                } : 
-                {
-                  zIndex: 1, 
-                  position: 'absolute',
-                  width: '90%',
-                  height: '360px',
-                  marginLeft: '2.25%',
-                  marginTop: '-34%'
-                }
-              }
-            /> */}
-
             <img
               src={indicator}
               alt=''
               style={this.props.online ?{ 
                 zIndex: 2, 
                 position: 'absolute',
-                paddingLeft:'5%',
-                paddingBottom:'15%',
+                marginLeft:'35%',
+                marginTop:'10%',
+                width: '200px'
                 } : {
                   zIndex: 2, 
                   position: 'absolute',
@@ -144,26 +118,21 @@ class WebcamCapture extends React.Component {
               }
             />
 
-            {this.props.online ? 
-              <Button
-                onClick = {this.capture}
-                color='grey'
-                icon='expand'
-                label={{ 
-                  basic: true, 
-                  color: 'grey', 
-                  pointing: 'left', 
-                  content: 'Capture me' ,
-                }}
-                style = {{
-                  zIndex: 3,
-                  position: 'absolute',
-                  left: '5%',
-                  top:'10%'
-                }}
-              /> 
-              : null
-            } 
+          <div
+            style = {{
+              zIndex: 3,
+              position:'absolute',
+              left: '-62%',
+              marginTop:'30%'
+            }}
+          >
+            <Button animated='fade' primary onClick={this.send_request.bind(this)}>
+              <Button.Content visible>Capture picture</Button.Content>
+              <Button.Content hidden>
+                <Icon name = 'camera'/> Save
+              </Button.Content>
+            </Button>
+          </div>
           </div>
         </Container>
       </div>

@@ -1,22 +1,22 @@
 import React from 'react';
 import {Layout} from '../Layout.js';
-import {Link} from  'react-router-dom';
-import QRScanner from './QRScanner.js';
-import { 
-  Grid,
-  Segment,
-  Header,
-  Icon,
-  Button,
-  Divider,
-  Container
-} from 'semantic-ui-react'
+// import {Link} from  'react-router-dom';
+import {QRScanner} from './QRScanner.js';
+// import { 
+//   Grid,
+//   Segment,
+//   Header,
+//   Icon,
+//   Button,
+//   Divider,
+//   Container
+// } from 'semantic-ui-react'
 
 export class Checkin extends React.Component {
   render() {
     return (
       <Layout>
-        <Grid>
+        {/* <Grid>
           <Grid.Row columns={2} centered>
             <Grid.Column>
               <SegmentBox/>
@@ -25,26 +25,27 @@ export class Checkin extends React.Component {
               <QRScanner/>
             </Grid.Column>
           </Grid.Row>
-        </Grid>
+        </Grid> */}
+        <QRScanner/>
       </Layout>
     )
   }
 }
 
-const SegmentBox = () => (
-  <Container fluid textAlign='center'>
-    <Segment placeholder>
-      <Header icon as ='h2'>
-        <Icon name='qrcode' />
-        QR-code scanner
-      </Header>
-      <p>
-        Scan the QR-code you received in your mail.
-      </p>
-      <Divider horizontal>Or</Divider>
-      <Link to='/lobby'>
-        <Button color='red' content='Go back' icon='undo' labelPosition='left' />
-      </Link>
-    </Segment>
-  </Container>
-)
+// const SegmentBox = () => (
+//   <Container fluid textAlign='center'>
+//     <Segment placeholder>
+//       <Header icon as ='h2'>
+//         <Icon name='qrcode' />
+//         QR-code scanner
+//       </Header>
+//       <p>
+//         Scan the QR-code you received in your mail.
+//       </p>
+//       <Divider horizontal>Or</Divider>
+//       <Link to='/lobby'>
+//         <Button color='red' content='Go back' icon='undo' labelPosition='left' />
+//       </Link>
+//     </Segment>
+//   </Container>
+// )
