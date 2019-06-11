@@ -1,134 +1,96 @@
-import React from 'react';
-import {Layout} from '../../Layout.js'
-import {Link} from  'react-router-dom';
-import { 
-  Grid,
-  Card,
-  Icon,
-  Header,
-  Button,
-  Segment
-} from 'semantic-ui-react'
+import React from "react";
+import { Layout } from "../../Layout.js";
+import { Link } from "react-router-dom";
+import { Grid, Card, Icon, Header, Button, Segment } from "semantic-ui-react";
 
 export class Lobby extends React.Component {
-
   render() {
     return (
       <Layout>
-        <Grid centered columns={4} relaxed='very'>
+        <Grid centered columns={4} relaxed="very">
           <Grid.Row>
-            <MainHeader/>
+            <MainHeader />
           </Grid.Row>
 
           <Grid.Row>
             <Grid.Column>
-              <Segment 
-              >
-                <WithReservation/>
+              <Segment>
+                <WithReservation />
               </Segment>
             </Grid.Column>
             <Grid.Column>
-              <Segment 
-              >
-                <WithoutReservation/>
+              <Segment>
+                <WithoutReservation />
               </Segment>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Layout>
-    )
+    );
   }
 }
 
 const MainHeader = () => (
-  <div style = {{marginBottom:'1em'}}>
-    <Header as='h2'>
-      <Icon name='id badge' />
+  <div style={{ marginBottom: "1em" }}>
+    <Header as="h2">
+      <Icon name="id badge" />
       <Header.Content>
         Welcome
         <Header.Subheader>Self check-in system</Header.Subheader>
       </Header.Content>
     </Header>
   </div>
-)
+);
 
 const WithReservation = () => {
   return (
-    <Link link to='/check-in'>
+    <Link link to="/check-in">
       <Card raised>
         <Card.Content>
-          <Card.Header>
-            With reservation
-          </Card.Header>
+          <Card.Header>With reservation</Card.Header>
           <Card.Meta>
             <span>Pre-booked</span>
           </Card.Meta>
         </Card.Content>
-        <Card.Content 
-          description = {description} 
-          style = {CardStyle}
-        />
+        <Card.Content description={description} style={CardStyle} />
         <Card.Content extra>
-          <Button 
-            animated 
-            basic 
-            color='green' 
-            fluid
-          >
-        <Button.Content visible>
-          Check-in
-        </Button.Content>
-        <Button.Content hidden>
-          Enter
-        </Button.Content>
-      </Button>
+          <Button animated basic color="green" fluid>
+            <Button.Content visible>Check-in</Button.Content>
+            <Button.Content hidden>Enter</Button.Content>
+          </Button>
         </Card.Content>
       </Card>
     </Link>
-  )
-}
+  );
+};
 const WithoutReservation = () => {
   return (
-    <Link link to='/reservation'>
+    <Link link to="/reservation">
       <Card raised>
         <Card.Content>
-          <Card.Header>
-            Without reservation
-          </Card.Header>
+          <Card.Header>Without reservation</Card.Header>
           <Card.Meta>
             <span>Walk-in guest</span>
           </Card.Meta>
         </Card.Content>
-        <Card.Content 
-          description = {description} 
-          style = {CardStyle}
-        />
+        <Card.Content description={description} style={CardStyle} />
         <Card.Content extra>
-          <Button 
-            animated 
-            basic 
-            color='blue' 
-            fluid
-          >
-        <Button.Content visible>
-          Register
-        </Button.Content>
-        <Button.Content hidden>
-          Enter
-        </Button.Content>
-      </Button>
+          <Button animated basic color="blue" fluid>
+            <Button.Content visible>Register</Button.Content>
+            <Button.Content hidden>Enter</Button.Content>
+          </Button>
         </Card.Content>
       </Card>
     </Link>
-  )
-}
+  );
+};
 
 const CardStyle = {
-  minHeight : '15em',
-  maxHeight : '15em'
-}
+  minHeight: "15em",
+  maxHeight: "15em"
+};
 
 // Todo: describe requirements
 const description = [
-  'Hendrerit Aliquet gravida, nisl donec nam blandit mollis vehicula auctor purus, ligula dui cum phasellus venenatis tortor fringilla lectus risus fames lacinia parturient, magnis amet vestibulum rhoncus molestie imperdiet at.'
-]
+  "Hendrerit Aliquet gravida, nisl donec nam blandit mollis vehicula auctor purus, ligula dui cum phasellus venenatis tortor fringilla lectus risus fames lacinia parturient, magnis amet vestibulum rhoncus molestie imperdiet at."
+];

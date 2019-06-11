@@ -1,6 +1,6 @@
 import React from "react";
-import {Room} from '../../components/Room.js';
-import TimedWebcamCapture from '../../components/TimedWebcamCapture.js';
+import { Room } from "../../components/Room.js";
+import TimedWebcamCapture from "../../components/TimedWebcamCapture.js";
 
 export class Hotelroom extends React.Component {
   constructor(props) {
@@ -37,16 +37,14 @@ export class Hotelroom extends React.Component {
     const Chosen = this.state.chosen;
     return (
       <>
-        <header className="App-header">
-        </header>
-        { Chosen ? (
-            <TimedWebcamCapture roomNumber={this.state.roomNumber} />
-            ) : (
-                <a onClick={() => this.ChooseRoom(this.state.rooms)}>
-                    <Room number={this.state.rooms} />
-                </a>
-            )
-        }
+        <header className="App-header"></header>
+        {Chosen ? (
+          <TimedWebcamCapture roomNumber={this.state.roomNumber} />
+        ) : (
+          <a onClick={() => this.ChooseRoom(this.state.rooms)}>
+            <Room number={this.state.rooms} />
+          </a>
+        )}
       </>
     );
   }

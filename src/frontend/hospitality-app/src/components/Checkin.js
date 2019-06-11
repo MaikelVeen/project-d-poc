@@ -1,8 +1,8 @@
-import React from 'react';
-import {Layout} from '../Layout.js';
+import React from "react";
+import { Layout } from "../Layout.js";
 // import {Link} from  'react-router-dom';
-import {QRScanner} from './QRScanner.js';
-// import { 
+import { QRScanner } from "./QRScanner.js";
+// import {
 //   Grid,
 //   Segment,
 //   Header,
@@ -26,9 +26,9 @@ export class Checkin extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid> */}
-        <QRScanner/>
+        <QRScanner />
       </Layout>
-    )
+    );
   }
 }
 
