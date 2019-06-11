@@ -23,6 +23,7 @@ export class RegisterFace extends React.Component {
   }
   
   handleSubmit = () => {
+    // TODO:'Send image to the back-end'
     this.props.history.push(
       '/confirm-registration', 
       { 
@@ -73,13 +74,9 @@ const SegmentBox = props => (
         <p>
           Scan your face to register for keyless entry. 
         </p>
-        {/* <Link to='/confirm-registration'> */}
           <Button color='blue' content='Take picture' icon='camera' labelPosition='left' onClick = {props.handle}/>
-        {/* </Link> */}
         <Divider horizontal>Or</Divider>
-        {/* <Link to='/reservation'> */}
           <Button color='red' content='Go back' icon='undo' labelPosition='left' onClick={props.return}/>
-        {/* </Link> */}
       </Segment>
     </Container>
   )

@@ -65,7 +65,7 @@ class WebcamCapture extends React.Component {
     return (
       <div 
       style = {{
-        // backgroundColor:'black'
+        backgroundColor:'black'
       }}
       >
         <Container>
@@ -104,7 +104,7 @@ class WebcamCapture extends React.Component {
               />
             </div>
 
-            <img
+            {/* <img
               src={image}
               alt =''
               style={
@@ -124,7 +124,7 @@ class WebcamCapture extends React.Component {
                   marginTop: '-34%'
                 }
               }
-            />
+            /> */}
 
             <img
               src={indicator}
