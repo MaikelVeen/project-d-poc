@@ -19,6 +19,7 @@ class WebcamCapture extends React.Component {
       id: props.id,
       image: '',
       message: '',
+      roomNumber: -1,
       height: window.innerHeight,
       width: window.innerWidth,
       active: false,
@@ -60,8 +61,12 @@ class WebcamCapture extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     }).then(
       result => {
-        this.setState({
-          message: result
+        result.json().then(data => {
+          this.setState(
+            {
+              roomNumber: data.roomNumber
+            }    
+          );
         });
       },
       error => {
@@ -80,7 +85,7 @@ class WebcamCapture extends React.Component {
       facingMode: 'user'
     };
 
-    return (
+    return ( 
       <div
         style={{
           backgroundColor: 'black'
@@ -90,7 +95,7 @@ class WebcamCapture extends React.Component {
           <div>
             <Segment inverted>
               <Header content="Status" />
-              Your check-in was successful.
+              {"Your check-in was successful. You stay in room number " + this.state.roomNumber}
             </Segment>
             <Link to="/lobby">
               <Button animated>

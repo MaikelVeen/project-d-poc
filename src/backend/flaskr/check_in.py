@@ -73,7 +73,12 @@ def send_image():
         db.commit()
 
         status = True
-        response_dict = dict([('valid', status)])
+
+        result = db.execute('SELECT roomNumber FROM userRoom WHERE user_id = ?',(g.data['id'],)).fetchone()
+        if result is None:
+            raise Exception
+
+        response_dict = dict([('valid', status),('roomNumber',result[0])])
         response = jsonify(response_dict)
         return response, 200
 
@@ -81,4 +86,4 @@ def send_image():
         print(f"Encountered exception during image saving: {e}")
         response_dict = dict([('valid', status)])
         response = jsonify(response_dict)
-        return response, 200
+        return response, 500

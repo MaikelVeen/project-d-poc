@@ -16,3 +16,8 @@ def check_qr():
       data.append(row[0])
 
     return jsonify({'result':data}), 200
+
+@bp.route('/open', methods=['POST'])
+def open():
+    response = 'Joe'
+    return response, 200

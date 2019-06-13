@@ -1,5 +1,5 @@
-import React from "react";
-import { Layout } from "../Layout.js";
+import React from 'react';
+import { Layout } from '../Layout.js';
 import {
   Segment,
   Step,
@@ -13,7 +13,7 @@ import {
   Header,
   Dimmer,
   Loader
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
 export class ConfirmRegistration extends React.Component {
   constructor(props) {
@@ -28,27 +28,33 @@ export class ConfirmRegistration extends React.Component {
     console.log(prevData);
   }
 
+  /**
+   * Handle route pushing when user clicks edit
+   */
   handleEdit = () => {
     this.state.extraStep
-      ? this.props.history.push("/reservation", { data: this.state.data })
-      : this.props.history.push("/online", {
+      ? this.props.history.push('/reservation', { data: this.state.data })
+      : this.props.history.push('/online', {
           data: this.state.data
         });
   };
 
+  /**
+   * Callback for register submit button
+   */
   handleSubmit = () => {
     this.setState({ loaded: true });
 
     let bodyData = JSON.stringify({
-      name: this.state.data.firstName + " " + this.state.data.lastName,
+      name: this.state.data.firstName + ' ' + this.state.data.lastName,
       email: this.state.data.email,
       phone: this.state.data.tel
     });
-    fetch("http://localhost:5000/register/post", {
-      method: "POST",
+    fetch('http://localhost:5000/register/post', {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       },
       body: bodyData
     }).then(response => {
@@ -57,22 +63,25 @@ export class ConfirmRegistration extends React.Component {
       } else {
         this.setState({ loaded: false });
         alert(
-          "Error! Registration did not succeed. Please check your personal information."
+          'Error! Registration did not succeed. Please check your personal information.'
         );
       }
     });
   };
 
+  /**
+   * Callback for completion of regisration
+   */
   handleRegistration = () => {
     this.state.extraStep
-      ? this.props.history.push("/lobby")
-      : this.props.history.push("/");
+      ? this.props.history.push('/lobby')
+      : this.props.history.push('/');
   };
 
   render() {
     return (
       <Layout>
-        <Segment style={{ backgroundColor: "transparent", minHeight: 500 }}>
+        <Segment style={{ backgroundColor: 'transparent', minHeight: 500 }}>
           <Dimmer bl active={this.state.loaded}>
             {this.state.register ? (
               <div>
@@ -99,7 +108,7 @@ export class ConfirmRegistration extends React.Component {
             stackable
             textAlign="center"
             centered
-            style={{ marginTop: "3em" }}
+            style={{ marginTop: '3em' }}
           >
             <Grid.Row verticalAlign="middle">
               <Grid.Column>
@@ -122,7 +131,7 @@ export class ConfirmRegistration extends React.Component {
 }
 
 const StepsBar = props => (
-  <div style={{ margin: "0 0 2em 0" }}>
+  <div style={{ margin: '0 0 2em 0' }}>
     <Step.Group stackable="tablet">
       <Step disabled>
         <Icon name="address card" />
@@ -157,7 +166,7 @@ const StepsBar = props => (
 
 const OverviewCard = props => (
   <div
-    style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
   >
     <Card.Group>
       <Card raised>
@@ -211,7 +220,7 @@ const OverviewCard = props => (
 );
 const Approve = props => (
   <div
-    style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
   >
     <Segment textAlign="center">
       <Header as="h3">

@@ -1,13 +1,13 @@
-import React from "react";
-import Webcam from "react-webcam";
-import indicator from "../assets/indicator.png";
+import React from 'react';
+import Webcam from 'react-webcam';
+import indicator from '../assets/indicator.png';
 
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: "",
-      message: "",
+      image: '',
+      message: '',
       capture: false,
       height: window.innerHeight,
       width: window.innerWidth
@@ -50,13 +50,12 @@ class TimedWebcamCapture extends React.Component {
 
   //send post request to backend, after response set capture == true
   send_request = () => {
-    fetch("http://localhost:5000/check/image", {
-      method: "POST",
+    fetch('http://localhost:5000/door/open', {
+      method: 'POST',
       body: JSON.stringify({
-        id: "djdjdj",
         image_string: this.state.image.slice(23)
       }),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     }).then(
       result => {
         this.setState({
@@ -77,7 +76,7 @@ class TimedWebcamCapture extends React.Component {
     const videoConstraints = {
       width: this.state.width,
       height: this.state.height,
-      facingMode: "user"
+      facingMode: 'user'
     };
 
     return (
@@ -85,18 +84,18 @@ class TimedWebcamCapture extends React.Component {
         <div
           style={{
             // backgroundColor:'black'
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh"
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh'
           }}
         >
           <div
             id="webcam"
             style={{
               zIndex: 0,
-              position: "absolute",
-              backgroundColor: "black"
+              position: 'absolute',
+              backgroundColor: 'black'
             }}
           >
             <Webcam
@@ -105,30 +104,19 @@ class TimedWebcamCapture extends React.Component {
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
               style={{
-                transform: "rotateY(180deg)",
+                transform: 'rotateY(180deg)',
                 minHeight: this.state.height,
                 minWidth: this.state.width
               }}
             />
           </div>
 
-          {/* <img
-                id="indicator"
-                style={{ 
-                  zIndex: 2, 
-                  position: "absolute", 
-                  // top: 1 
-                }}
-                src={indicator}
-                alt=''
-              /> */}
-
           <img
             src={indicator}
             alt=""
             style={{
               zIndex: 1,
-              position: "absolute"
+              position: 'absolute'
             }}
           />
         </div>
