@@ -134,7 +134,7 @@ def _compare(source_file_path, target_file_path):
         return False
 
     if len(response['FaceMatches']) == 0:
-        return False
+        return (False,True)
 
     similarity = response['FaceMatches'][0]['Similarity']
     print(similarity)
