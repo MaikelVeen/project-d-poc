@@ -75,9 +75,9 @@ const WithoutReservation = () => {
         </Card.Content>
         <Card.Content description={descriptionReservation} style={CardStyle} />
         <Card.Content extra>
-          <Button animated basic color="blue" fluid>
-            <Button.Content visible>Register</Button.Content>
-            <Button.Content hidden>Enter</Button.Content>
+          <Button animated basic color="blue" fluid disabled={true}>
+            <Button.Content visible >Not available</Button.Content>
+            <Button.Content hidden>Not available</Button.Content>
           </Button>
         </Card.Content>
       </Card>

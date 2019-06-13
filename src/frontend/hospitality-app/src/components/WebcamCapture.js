@@ -1,7 +1,7 @@
-import React from "react";
-import Webcam from "react-webcam";
-import { Link } from "react-router-dom";
-import indicator from "../assets/indicator.png";
+import React from 'react';
+import Webcam from 'react-webcam';
+import { Link } from 'react-router-dom';
+import indicator from '../assets/indicator.png';
 import {
   Container,
   Button,
@@ -9,7 +9,7 @@ import {
   Dimmer,
   Header,
   Segment
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
 class WebcamCapture extends React.Component {
   constructor(props) {
@@ -17,12 +17,19 @@ class WebcamCapture extends React.Component {
     console.log(props);
     this.state = {
       id: props.id,
-      image: "",
-      message: "",
+      image: '',
+      message: '',
       height: window.innerHeight,
       width: window.innerWidth,
-      active: false
+      active: false,
+      disableCaptureButton: true
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ disableCaptureButton: false });
+    }, 2000);
   }
 
   setRef = webcam => {
@@ -44,13 +51,13 @@ class WebcamCapture extends React.Component {
       ? this.setState({ active: true })
       : this.setState({ active: false });
 
-    fetch("http://localhost:5000/check/image", {
-      method: "POST",
+    fetch('http://localhost:5000/check/image', {
+      method: 'POST',
       body: JSON.stringify({
         id: this.state.id,
         image_string: this.state.image.slice(23)
       }),
-      headers: { "Content-Type": "application/json" }
+      headers: { 'Content-Type': 'application/json' }
     }).then(
       result => {
         this.setState({
@@ -68,15 +75,15 @@ class WebcamCapture extends React.Component {
 
   render() {
     const videoConstraints = {
-      width: "100%",
-      height: "100%",
-      facingMode: "user"
+      width: '100%',
+      height: '100%',
+      facingMode: 'user'
     };
 
     return (
       <div
         style={{
-          backgroundColor: "black"
+          backgroundColor: 'black'
         }}
       >
         <Dimmer active={this.state.active} page>
@@ -100,7 +107,7 @@ class WebcamCapture extends React.Component {
             <div
               style={{
                 zIndex: 0,
-                position: "absolute"
+                position: 'absolute'
               }}
             >
               <Webcam
@@ -111,17 +118,17 @@ class WebcamCapture extends React.Component {
                 style={
                   this.props.online
                     ? {
-                        transform: "rotateY(180deg)",
-                        height: "100%",
-                        width: "100%",
-                        marginLeft: "3.5%"
+                        transform: 'rotateY(180deg)',
+                        height: '100%',
+                        width: '100%',
+                        marginLeft: '3.5%'
                       }
                     : {
-                        transform: "rotateY(180deg)",
-                        height: "90%",
-                        width: "90%",
-                        marginLeft: "3.5%",
-                        marginTop: "-34%"
+                        transform: 'rotateY(180deg)',
+                        height: '90%',
+                        width: '90%',
+                        marginLeft: '3.5%',
+                        marginTop: '-34%'
                       }
                 }
               />
@@ -133,17 +140,17 @@ class WebcamCapture extends React.Component {
                 this.props.online
                   ? {
                       zIndex: 2,
-                      position: "absolute",
-                      marginLeft: "35%",
-                      marginTop: "10%",
-                      width: "200px"
+                      position: 'absolute',
+                      marginLeft: '35%',
+                      marginTop: '10%',
+                      width: '200px'
                     }
                   : {
                       zIndex: 2,
-                      position: "absolute",
-                      marginLeft: "30.75%",
-                      marginTop: "-20%",
-                      width: "200px"
+                      position: 'absolute',
+                      marginLeft: '30.75%',
+                      marginTop: '-20%',
+                      width: '200px'
                     }
               }
             />
@@ -152,19 +159,19 @@ class WebcamCapture extends React.Component {
                 this.props.online
                   ? {
                       zIndex: 3,
-                      position: "absolute",
-                      left: "-62%",
-                      marginTop: "30%"
+                      position: 'absolute',
+                      left: '-62%',
+                      marginTop: '30%'
                     }
                   : {
                       zIndex: 3,
-                      position: "absolute",
-                      left: "-69%",
-                      marginTop: "4%"
+                      position: 'absolute',
+                      left: '-69%',
+                      marginTop: '4%'
                     }
               }
             >
-              <Button animated="fade" primary onClick={this.capture.bind(this)}>
+              <Button animated="fade" primary onClick={this.capture.bind(this)} disabled={this.state.disableCaptureButton}>
                 <Button.Content visible>Capture picture</Button.Content>
                 <Button.Content hidden>
                   <Icon name="camera" /> Save
