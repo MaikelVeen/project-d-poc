@@ -131,7 +131,7 @@ def _compare(source_file_path, target_file_path):
         response = amazon_client.compare_faces(SimilarityThreshold=0, SourceImage={
                                                'Bytes': image_source.read()}, TargetImage={'Bytes': image_target.read()})
     except:
-        return False
+        return (False,True)
 
     if len(response['FaceMatches']) == 0:
         return (False,True)
