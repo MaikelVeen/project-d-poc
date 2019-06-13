@@ -54,7 +54,7 @@ If every step has been walked through properly you should be able to use the mai
 
 Why we do this:
     
-    We do this because its a good practice to store sensitive data outside of the view of source control and of course, it's not wise to have passwords in plaintext in your files.
+We do this because its a good practice to store sensitive data outside of the view of source control and of course, it's not wise to have passwords in plaintext in your files.
 
 That concludes the email setup
 

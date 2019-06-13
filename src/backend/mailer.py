@@ -2,7 +2,6 @@ import os
 import smtplib
 from email.message import EmailMessage 
 import imghdr
-from flaskr.db import get_db
 
 
 def send_email(email, name, qr_path):
