@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import indicator from "../assets/indicator.png";
 import { Link } from "react-router-dom";
 import finished from "../assets/finis.mp3";
+import error from "../assets/error.mp3";
+import scan  from "../assets/scan.mp3"
 import Sound from "react-sound";
 import { Segment, Icon, Button, Header, Dimmer, Loader, Progress } from "semantic-ui-react";
 class TimedWebcamCapture extends React.Component {
@@ -117,12 +119,13 @@ class TimedWebcamCapture extends React.Component {
           {Open ? (
             <div>
               <Sound url={finished} playStatus={this.state.play} autoLoad />
-              <Segment inverted>
-                <Header content="Door Open" />
-                Welcome
+              <Segment style ={{width: "70vh", height: "30vh", fontWeight: "bold",
+              fontSize: "5em"}} inverted>
+                <Header content="Door opened" />
+                <h1> Welcome </h1>
               </Segment>
               <Link to="/">
-                <Button animated>
+                <Button  animated>
                   <Button.Content visible>Go back</Button.Content>
                   <Button.Content hidden>
                     <Icon name="arrow right" />
@@ -134,13 +137,14 @@ class TimedWebcamCapture extends React.Component {
 
           {Reject ?(
             <div>
-              <Sound url={finished} playStatus={this.state.play} autoLoad />
-              <Segment inverted>
+              <Sound url={error} playStatus={this.state.play} autoLoad />
+              <Segment style ={{width: "70vh", height: "30vh", fontWeight: "bold",
+              fontSize: "5em"}} inverted>
                 <Header content="Rejected" />
-                You are not allowed to enter
+                <h1>You are not allowed to enter</h1>
               </Segment>
               <Link to="/">
-                <Button animated>
+                <Button size="large" animated>
                   <Button.Content visible>Go back</Button.Content>
                   <Button.Content hidden>
                     <Icon name="arrow right" />
@@ -152,10 +156,11 @@ class TimedWebcamCapture extends React.Component {
 
           {this.state.retry ?(
              <div>
-             <Sound url={finished} playStatus={this.state.play} autoLoad />
-             <Segment inverted>
-               <Header content="Not recognized" />
-               <Button onClick={() => this.handleRetry()} animated>
+             <Sound url={error} playStatus={this.state.play} autoLoad />
+             <Segment style ={{width: "80vh", height: "30vh", fontWeight: "bold",
+              fontSize: "5em"}} inverted>
+                <Header content="Not recognized" />
+               <Button size="large" onClick={() => this.handleRetry()} animated>
                    <Button.Content visible>Retry</Button.Content>
                    <Button.Content hidden>
                      <Icon name="arrow right" />
@@ -194,7 +199,10 @@ class TimedWebcamCapture extends React.Component {
               }}
             />
           </div>
-          {Scanning ? (<Progress active percent={100} color = "yellow" size="tiny" style={{
+          {Scanning ? (
+          <>
+             
+          <Progress active percent={100} color = "yellow" size="tiny" style={{
               zIndex: 0,
               position: "absolute",
               marginTop: "35vh",
@@ -202,7 +210,8 @@ class TimedWebcamCapture extends React.Component {
               fontWeight: "bold",
               fontSize: "1.5em",
               width: "40vh"
-            }}>Scanning</Progress>) : ("")}
+            }}>Scanning</Progress>
+            <Sound url={scan} loop playStatus={Sound.status.PLAYING} autoLoad /></>) : ("")}
           <img
             src={indicator}
             alt=""
