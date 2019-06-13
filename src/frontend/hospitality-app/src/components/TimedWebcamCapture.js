@@ -27,25 +27,7 @@ class TimedWebcamCapture extends React.Component {
         this.setState({ capture: true });
       }.bind(this),
       2000
-    );/*
-    setTimeout(
-      function() {
-        this.setState({ response: true });
-      }.bind(this),
-      5000
     );
-    setTimeout(
-      function() {
-        this.setState({ open: true, play: Sound.status.PLAYING });
-      }.bind(this),
-      8000
-    );
-    setTimeout(
-      function() {
-        this.setState({ play: Sound.status.STOPPED});
-      }.bind(this),
-      8800
-    );*/
   }
 
   // capture photo every time capture == true
@@ -83,9 +65,14 @@ class TimedWebcamCapture extends React.Component {
       headers: { "Content-Type": "application/json" }
     }).then(
       result => {
-        this.setState({
-          message: result,
-          capture: false
+        result.json().then(data => {
+          this.setState(
+            {
+              response: true,
+              open: data.valid
+            }    
+          );
+          console.log(data.valid)
         });
       },
       error => {
