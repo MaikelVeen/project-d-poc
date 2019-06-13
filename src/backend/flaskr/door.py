@@ -10,6 +10,7 @@ import uuid
 
 bp = Blueprint('door', __name__, url_prefix='/door')
 THRESHOLD = 99
+LOWER_THRESHOLD = 90
 
 IMAGE_SCHEMA = {
     'type': 'object',
@@ -40,7 +41,7 @@ def open_door():
     source_file_path = _get_source_path(user_id)
     result = _compare(source_file_path, target_file_path)
 
-    response_dict = dict([('valid', result)])
+    response_dict = dict([('upper_threshold', result[0]),('lower_threshold', result[1])])
     response = jsonify(response_dict)
     return response, 200
 
@@ -116,8 +117,9 @@ def _compare(source_file_path, target_file_path):
         target_file_path: path to image current attempt
 
     Returns:
-        True if face's similarity is above threshold
-        False if face's similarity is not above threshold
+        Tuple, first item indicates whether similarity is above
+        upper threshold. Second item is whether or not lower threshold
+        is reached. 
 
     """
     amazon_client = boto3.client('rekognition')
@@ -138,6 +140,9 @@ def _compare(source_file_path, target_file_path):
     print(similarity)
 
     if similarity > THRESHOLD:
-        return True
+        return (True,False)
     else:
-        return False
+        if similarity < LOWER_THRESHOLD:
+            return (False,True)
+        else:
+            return (False,False)
