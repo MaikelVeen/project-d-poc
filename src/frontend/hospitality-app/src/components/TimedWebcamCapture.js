@@ -1,30 +1,25 @@
-import React from 'react';
-import Webcam from 'react-webcam';
-import indicator from '../assets/indicator.png';
+import React from "react";
+import Webcam from "react-webcam";
+import indicator from "../assets/indicator.png";
 import { Link } from "react-router-dom";
-
-
-import {
-  Segment,
-  Icon,
-  Button,
-  Header,
-  Dimmer,
-} from 'semantic-ui-react';
+import finished from "../assets/finis.mp3";
+import Sound from "react-sound";
+import { Segment, Icon, Button, Header, Dimmer } from "semantic-ui-react";
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: '',
-      message: '',
+      image: "",
+      message: "",
       capture: false,
       height: window.innerHeight,
       width: window.innerWidth,
       open: false,
-      response: false
+      response: false,
+      play: Sound.status.STOPPED
     };
   }
-  
+
   //set 1 second timerout for webcam start-up
   componentDidMount() {
     setTimeout(
@@ -41,9 +36,15 @@ class TimedWebcamCapture extends React.Component {
     );
     setTimeout(
       function() {
-        this.setState({ open: true });
+        this.setState({ open: true, play: Sound.status.PLAYING });
       }.bind(this),
       8000
+    );
+    setTimeout(
+      function() {
+        this.setState({ play: Sound.status.STOPPED});
+      }.bind(this),
+      8800
     );
   }
 
@@ -59,7 +60,6 @@ class TimedWebcamCapture extends React.Component {
     this.webcam = webcam;
   };
 
- 
   //Capture photo and send request, stop calling capture
   capture = () => {
     const imageSource = this.webcam.getScreenshot();
@@ -74,12 +74,12 @@ class TimedWebcamCapture extends React.Component {
 
   //send post request to backend, after response set capture == true
   send_request = () => {
-    fetch('http://localhost:5000/door/open', {
-      method: 'POST',
+    fetch("http://localhost:5000/door/open", {
+      method: "POST",
       body: JSON.stringify({
         image_string: this.state.image.slice(23)
       }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     }).then(
       result => {
         this.setState({
@@ -95,67 +95,70 @@ class TimedWebcamCapture extends React.Component {
       }
     );
   };
- 
-
-
 
   render() {
     const videoConstraints = {
       width: this.state.width,
       height: this.state.height,
-      facingMode: 'user'
+      facingMode: "user"
     };
 
     return (
       <>
-      <Dimmer bl active={this.state.response}>
-            {this.state.open ? (        
-              <div>
-                <Segment inverted>
-                  <Header content="Door Open" />
-                  Welcome 
-                </Segment>
-                <Link to="/">
-                <Button animated >
+        <Dimmer bl active={this.state.response}>
+          {this.state.open ? (
+            <div>
+              <Sound
+                url={finished}
+                playStatus={this.state.play}
+                autoLoad
+
+              />
+              <Segment inverted>
+                <Header content="Door Open" />
+                Welcome
+              </Segment>
+              <Link to="/">
+                <Button animated>
                   <Button.Content visible>Go back</Button.Content>
                   <Button.Content hidden>
                     <Icon name="arrow right" />
                   </Button.Content>
                 </Button>
-                </Link>
-              </div>
-            ) : (
-              <div>
-                <Segment inverted>
-                  <Header content="Rejected" />
-                  This is not your room 
-                </Segment>
-                <Link to="/">
-                <Button animated >
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Segment inverted>
+                <Header content="Rejected" />
+                This is not your room
+              </Segment>
+              <Link to="/">
+                <Button animated>
                   <Button.Content visible>Go back</Button.Content>
                   <Button.Content hidden>
                     <Icon name="arrow right" />
                   </Button.Content>
                 </Button>
-                </Link>
-              </div>
-            )}
-          </Dimmer>
+              </Link>
+            </div>
+          )}
+        </Dimmer>
         <div
           style={{
             // backgroundColor:'black'
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh'
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh"
           }}
         >
           <div
             id="webcam"
             style={{
               zIndex: 0,
-              position: 'absolute',
-              backgroundColor: 'black'
+              position: "absolute",
+              backgroundColor: "black"
             }}
           >
             <Webcam
@@ -164,7 +167,7 @@ class TimedWebcamCapture extends React.Component {
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
               style={{
-                transform: 'rotateY(180deg)',
+                transform: "rotateY(180deg)",
                 minHeight: this.state.height,
                 minWidth: this.state.width
               }}
@@ -176,7 +179,7 @@ class TimedWebcamCapture extends React.Component {
             alt=""
             style={{
               zIndex: 1,
-              position: 'absolute'
+              position: "absolute"
             }}
           />
         </div>
