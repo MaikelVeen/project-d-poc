@@ -2,13 +2,14 @@ import React from 'react';
 import Webcam from 'react-webcam';
 import indicator from '../assets/indicator.png';
 import { Link } from "react-router-dom";
+
+
 import {
   Segment,
   Icon,
   Button,
   Header,
   Dimmer,
-  Loader
 } from 'semantic-ui-react';
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class TimedWebcamCapture extends React.Component {
       response: false
     };
   }
-
+  
   //set 1 second timerout for webcam start-up
   componentDidMount() {
     setTimeout(
@@ -94,6 +95,9 @@ class TimedWebcamCapture extends React.Component {
       }
     );
   };
+ 
+
+
 
   render() {
     const videoConstraints = {
@@ -105,7 +109,7 @@ class TimedWebcamCapture extends React.Component {
     return (
       <>
       <Dimmer bl active={this.state.response}>
-            {this.state.open ? (
+            {this.state.open ? (        
               <div>
                 <Segment inverted>
                   <Header content="Door Open" />

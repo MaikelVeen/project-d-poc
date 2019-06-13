@@ -1,7 +1,7 @@
 import React from "react";
 import { Room } from "../../components/Room.js";
 import TimedWebcamCapture from "../../components/TimedWebcamCapture.js";
-
+import { Grid, Image } from 'semantic-ui-react'
 export class Hotelroom extends React.Component {
   constructor(props) {
     super(props);
@@ -45,15 +45,24 @@ export class Hotelroom extends React.Component {
     return (
       <>
         <header className="App-header"></header>
+        <Grid columns={4 } >
+        <Grid.Row centered >
         {Chosen ? (
+          
           <TimedWebcamCapture roomNumber={this.state.roomNumber} />
+        
         ) : (
-          this.state.rooms.map(i => (
+          
+          this.state.rooms.map( i => (
+            <Grid.Column style={{marginLeft: "5em"}} >
             <a key = {i}onClick={() => this.ChooseRoom(i)}>
               <Room number={i} />
               </a>
+              </Grid.Column>
           ))
         )}
+          </Grid.Row>
+      </Grid>
       </>
     );
   }
