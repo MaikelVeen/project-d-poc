@@ -7,3 +7,4 @@ flask-cors
 pylint
 autopep8
 boto3
+rope
