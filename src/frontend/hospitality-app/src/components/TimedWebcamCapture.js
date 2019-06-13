@@ -4,7 +4,7 @@ import indicator from "../assets/indicator.png";
 import { Link } from "react-router-dom";
 import finished from "../assets/finis.mp3";
 import Sound from "react-sound";
-import { Segment, Icon, Button, Header, Dimmer } from "semantic-ui-react";
+import { Segment, Icon, Button, Header, Dimmer, Loader, Progress } from "semantic-ui-react";
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
@@ -15,9 +15,14 @@ class TimedWebcamCapture extends React.Component {
       height: window.innerHeight,
       width: window.innerWidth,
       open: false,
+      reject: false,
       response: false,
-      play: Sound.status.STOPPED
+      play: Sound.status.STOPPED,
+      scanning: false,
+      retry: false,
+      activate: true,
     };
+    this.handleRetry = this.handleRetry.bind(this)
   }
 
   //set 1 second timerout for webcam start-up
@@ -35,6 +40,9 @@ class TimedWebcamCapture extends React.Component {
     if (this.state.capture === true) {
       this.capture();
     }
+    if (this.state.response == true && this.state.reject == false && this.state.open == false && this.state.activate == true)
+    {this.retry()}
+    
   }
   componentWillUnmount() {}
 
@@ -56,6 +64,8 @@ class TimedWebcamCapture extends React.Component {
 
   //send post request to backend, after response set capture == true
   send_request = () => {
+   this.setState({scanning: true})
+
     fetch("http://localhost:5000/door/open", {
       method: "POST",
       body: JSON.stringify({
@@ -66,14 +76,15 @@ class TimedWebcamCapture extends React.Component {
     }).then(
       result => {
         result.json().then(data => {
-          this.setState(
-            {
-              response: true,
-              open: data.valid,
-              play: Sound.status.PLAYING
-            }    
-          );
-          console.log(data.valid)
+          this.setState({
+            response: true,
+            open: data.upper_threshold,
+            reject: data.lower_threshold,
+            play: Sound.status.PLAYING,
+            scanning: false
+          });
+          console.log(data.upper_threshold );
+          console.log(data.lower_threshold );
         });
       },
       error => {
@@ -84,25 +95,28 @@ class TimedWebcamCapture extends React.Component {
       }
     );
   };
-
+  retry(){
+   this.setState({activate: false, retry: true})
+  }
+  handleRetry(){
+    this.setState({retry: false, capture: true , response: false, activate: true})
+  }
   render() {
     const videoConstraints = {
       width: this.state.width,
       height: this.state.height,
       facingMode: "user"
     };
-
+    const Open = this.state.open;
+    const Reject = this.state.reject;
+   
+    const Scanning = this.state.scanning;
     return (
       <>
         <Dimmer bl active={this.state.response}>
-          {this.state.open ? (
+          {Open ? (
             <div>
-              <Sound
-                url={finished}
-                playStatus={this.state.play}
-                autoLoad
-
-              />
+              <Sound url={finished} playStatus={this.state.play} autoLoad />
               <Segment inverted>
                 <Header content="Door Open" />
                 Welcome
@@ -116,11 +130,14 @@ class TimedWebcamCapture extends React.Component {
                 </Button>
               </Link>
             </div>
-          ) : (
+          ): ("")}
+
+          {Reject ?(
             <div>
+              <Sound url={finished} playStatus={this.state.play} autoLoad />
               <Segment inverted>
                 <Header content="Rejected" />
-                This is not your room
+                You are not allowed to enter
               </Segment>
               <Link to="/">
                 <Button animated>
@@ -131,7 +148,22 @@ class TimedWebcamCapture extends React.Component {
                 </Button>
               </Link>
             </div>
-          )}
+          ): ("")}
+
+          {this.state.retry ?(
+             <div>
+             <Sound url={finished} playStatus={this.state.play} autoLoad />
+             <Segment inverted>
+               <Header content="Not recognized" />
+               <Button onClick={() => this.handleRetry()} animated>
+                   <Button.Content visible>Retry</Button.Content>
+                   <Button.Content hidden>
+                     <Icon name="arrow right" />
+                   </Button.Content>
+                 </Button>
+             </Segment>
+           </div>
+          ):("")}
         </Dimmer>
         <div
           style={{
@@ -162,7 +194,15 @@ class TimedWebcamCapture extends React.Component {
               }}
             />
           </div>
-
+          {Scanning ? (<Progress active percent={100} color = "yellow" size="tiny" style={{
+              zIndex: 0,
+              position: "absolute",
+              marginTop: "35vh",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1.5em",
+              width: "40vh"
+            }}>Scanning</Progress>) : ("")}
           <img
             src={indicator}
             alt=""
