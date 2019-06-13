@@ -1,8 +1,9 @@
 import React from "react";
-import { Room } from "../../components/Room.js";
-import TimedWebcamCapture from "../../components/TimedWebcamCapture.js";
+import HotelMenu from "../components/Menu";
+import Room from "../components/Room";
+import TimedWebcamCapture from "../components/TimedWebcamCapture";
 
-export class Hotelroom extends React.Component {
+class HotelRoom extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,17 +18,10 @@ export class Hotelroom extends React.Component {
   request_rooms = () => {
     fetch("http://localhost:5000/door/numbers")
     .then(
-      
       result => {
-        result.json().then(data => {
-          this.setState(
-            {
-              rooms: data.result
-            },)
-            console.log(this.state.rooms)
-          }
-        )
-        
+        this.setState({
+         rooms: result,
+        });
       },
       error => {
         this.setState({
@@ -44,17 +38,22 @@ export class Hotelroom extends React.Component {
     const Chosen = this.state.chosen;
     return (
       <>
-        <header className="App-header"></header>
+        <header className="App-header">
+          <HotelMenu />
+        </header>
         {Chosen ? (
           <TimedWebcamCapture roomNumber={this.state.roomNumber} />
         ) : (
           this.state.rooms.map(i => (
-            <a key = {i}onClick={() => this.ChooseRoom(i)}>
+            <a onClick={() => this.ChooseRoom(i)}>
               <Room number={i} />
-              </a>
+              {this.state.rooms}
+            </a>
           ))
         )}
       </>
     );
   }
 }
+<div id="Room">Hotel Room {i}</div>
+export default HotelRoom;

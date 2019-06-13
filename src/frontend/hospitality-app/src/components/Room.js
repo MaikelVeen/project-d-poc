@@ -13,10 +13,8 @@ export class Room extends React.Component {
     return (
       // <div id="Room">Hotel Room {this.state.number}</div>
       <Layout id="Room">
-        <Card.Group itemsPerRow={3}>
-          {this.state.number.map(number => (
-            <MyCard number={number} />
-          ))}
+        <Card.Group itemsPerRow={3}>   
+            <MyCard number={this.state.number} />
         </Card.Group>
       </Layout>
     );
@@ -27,7 +25,6 @@ const MyCard = props => (
   <Card
     color="teal"
     raised
-    onClick={{}}
     header="Hotelroom"
     meta={"Number " + props.number}
   />
