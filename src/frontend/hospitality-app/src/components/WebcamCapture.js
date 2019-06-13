@@ -83,7 +83,7 @@ class WebcamCapture extends React.Component {
           <div>
             <Segment inverted>
               <Header content="Status" />
-              Your registration was successful.
+              Your check-in was successful.
             </Segment>
             <Link to="/lobby">
               <Button animated>

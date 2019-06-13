@@ -1,7 +1,7 @@
-import React from "react";
-import { Layout } from "../../Layout.js";
-import { Link } from "react-router-dom";
-import { Grid, Card, Icon, Header, Button, Segment } from "semantic-ui-react";
+import React from 'react';
+import { Layout } from '../../Layout.js';
+import { Link } from 'react-router-dom';
+import { Grid, Card, Icon, Header, Button, Segment } from 'semantic-ui-react';
 
 export class Lobby extends React.Component {
   render() {
@@ -31,7 +31,7 @@ export class Lobby extends React.Component {
 }
 
 const MainHeader = () => (
-  <div style={{ marginBottom: "1em" }}>
+  <div style={{ marginBottom: '1em' }}>
     <Header as="h2">
       <Icon name="id badge" />
       <Header.Content>
@@ -73,7 +73,7 @@ const WithoutReservation = () => {
             <span>Walk-in guest</span>
           </Card.Meta>
         </Card.Content>
-        <Card.Content description={description} style={CardStyle} />
+        <Card.Content description={descriptionReservation} style={CardStyle} />
         <Card.Content extra>
           <Button animated basic color="blue" fluid>
             <Button.Content visible>Register</Button.Content>
@@ -86,11 +86,12 @@ const WithoutReservation = () => {
 };
 
 const CardStyle = {
-  minHeight: "15em",
-  maxHeight: "15em"
+  minHeight: '12em',
+  maxHeight: '12em'
 };
 
-// Todo: describe requirements
-const description = [
-  "Hendrerit Aliquet gravida, nisl donec nam blandit mollis vehicula auctor purus, ligula dui cum phasellus venenatis tortor fringilla lectus risus fames lacinia parturient, magnis amet vestibulum rhoncus molestie imperdiet at."
-];
+const description =
+  'If you booked online you can scan the QR Code you have received in your inbox and check in.';
+
+const descriptionReservation =
+  'If you did not make a reservation online you can do it now and check in immediatly.';
