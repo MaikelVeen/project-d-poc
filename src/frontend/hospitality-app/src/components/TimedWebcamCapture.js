@@ -1,7 +1,15 @@
 import React from 'react';
 import Webcam from 'react-webcam';
 import indicator from '../assets/indicator.png';
-
+import { Link } from "react-router-dom";
+import {
+  Segment,
+  Icon,
+  Button,
+  Header,
+  Dimmer,
+  Loader
+} from 'semantic-ui-react';
 class TimedWebcamCapture extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +18,9 @@ class TimedWebcamCapture extends React.Component {
       message: '',
       capture: false,
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      open: false,
+      response: false
     };
   }
 
@@ -21,6 +31,18 @@ class TimedWebcamCapture extends React.Component {
         this.setState({ capture: true });
       }.bind(this),
       2000
+    );
+    setTimeout(
+      function() {
+        this.setState({ response: true });
+      }.bind(this),
+      5000
+    );
+    setTimeout(
+      function() {
+        this.setState({ open: true });
+      }.bind(this),
+      8000
     );
   }
 
@@ -36,6 +58,7 @@ class TimedWebcamCapture extends React.Component {
     this.webcam = webcam;
   };
 
+ 
   //Capture photo and send request, stop calling capture
   capture = () => {
     const imageSource = this.webcam.getScreenshot();
@@ -81,6 +104,39 @@ class TimedWebcamCapture extends React.Component {
 
     return (
       <>
+      <Dimmer bl active={this.state.response}>
+            {this.state.open ? (
+              <div>
+                <Segment inverted>
+                  <Header content="Door Open" />
+                  Welcome 
+                </Segment>
+                <Link to="/">
+                <Button animated >
+                  <Button.Content visible>Go back</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="arrow right" />
+                  </Button.Content>
+                </Button>
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <Segment inverted>
+                  <Header content="Rejected" />
+                  This is not your room 
+                </Segment>
+                <Link to="/">
+                <Button animated >
+                  <Button.Content visible>Go back</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="arrow right" />
+                  </Button.Content>
+                </Button>
+                </Link>
+              </div>
+            )}
+          </Dimmer>
         <div
           style={{
             // backgroundColor:'black'
