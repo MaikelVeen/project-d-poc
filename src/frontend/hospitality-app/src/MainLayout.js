@@ -60,19 +60,11 @@ const MenuBar = props => {
         <Button onClick={props.push} icon="list" inverted></Button>
       </Menu.Item>
       <Menu.Item header position="right">
-        <Label color="red" ribbon content="Concept" />
+       
         <Link to="/">
           <span style={{ fontSize: 18 }}>
-            <i>Groep 2</i>
+            <i>Hotel face recognition</i>
           </span>
-          <Image
-            src={logo}
-            spaced="right"
-            style={{
-              maxHeight: "2em",
-              marginLeft: "1em"
-            }}
-          />
         </Link>
       </Menu.Item>
     </Menu>
