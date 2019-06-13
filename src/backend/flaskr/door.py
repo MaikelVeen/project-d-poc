@@ -20,21 +20,16 @@ IMAGE_SCHEMA = {
     'required': ['room', 'image_string']
 }
 
-# TODO rename route, split function, add documentation
 @bp.route('/numbers', methods=['GET'])
-def check_qr():
-    db = get_db()
-    rows = db.execute('SELECT roomNumber FROM userRoom').fetchall()
-    data = list()
-    for row in rows:
-        data.append(row[0])
-
+def get_room():
+    """Route for getting all room numbers"""
+    data = _get_room_numbers()
     return jsonify({'result': data}), 200
-
 
 @bp.route('/open', methods=['POST'])
 @expects_json(IMAGE_SCHEMA)
 def open_door():
+    """Route for opening door"""
     image_data = base64.urlsafe_b64decode(g.data['image_string'])
     target_file_path = _save_attempt(image_data)
 
@@ -48,6 +43,15 @@ def open_door():
     response_dict = dict([('valid', result)])
     response = jsonify(response_dict)
     return response, 200
+
+def _get_room_numbers():
+    """ Get array of room numbers with linked user ids """
+    db = get_db()
+    rows = db.execute('SELECT roomNumber FROM userRoom').fetchall()
+    data = list()
+    for row in rows:
+        data.append(row[0])
+    return data
 
 
 def _save_attempt(image):
@@ -95,7 +99,7 @@ def _get_room_user(room_number):
 
 
 def _get_source_path(user_id):
-    """Returns the source file image path based on a user id"""
+    """ Returns the source file image path based on a user id """
     data_folder = Path("images/user_faces/")
     Path("images/user_faces").mkdir(parents=False, exist_ok=True)
     path_name = data_folder / (f"{user_id}.jpeg")
