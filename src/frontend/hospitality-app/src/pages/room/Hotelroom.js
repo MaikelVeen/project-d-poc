@@ -1,7 +1,8 @@
-import React from "react";
-import { Room } from "../../components/Room.js";
-import TimedWebcamCapture from "../../components/TimedWebcamCapture.js";
-import { Grid, Image } from "semantic-ui-react";
+import React from 'react';
+import { Room } from '../../components/Room.js';
+import TimedWebcamCapture from '../../components/TimedWebcamCapture.js';
+import { Grid, Image } from 'semantic-ui-react';
+
 export class Hotelroom extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ export class Hotelroom extends React.Component {
   }
 
   request_rooms = () => {
-    fetch("http://localhost:5000/door/numbers").then(
+    fetch('http://localhost:5000/door/numbers').then(
       result => {
         result.json().then(data => {
           this.setState({
@@ -46,7 +47,7 @@ export class Hotelroom extends React.Component {
               <TimedWebcamCapture roomNumber={this.state.roomNumber} />
             ) : (
               this.state.rooms.map(i => (
-                <Grid.Column style={{ marginLeft: "5em" }}>
+                <Grid.Column style={{ marginLeft: '5em' }}>
                   <a key={i} onClick={() => this.ChooseRoom(i)}>
                     <Room number={i} />
                   </a>
