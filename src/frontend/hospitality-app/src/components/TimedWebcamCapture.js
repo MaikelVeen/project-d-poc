@@ -69,7 +69,8 @@ class TimedWebcamCapture extends React.Component {
           this.setState(
             {
               response: true,
-              open: data.valid
+              open: data.valid,
+              play: Sound.status.PLAYING
             }    
           );
           console.log(data.valid)
