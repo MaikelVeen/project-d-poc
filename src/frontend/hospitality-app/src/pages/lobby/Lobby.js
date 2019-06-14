@@ -65,7 +65,7 @@ const WithReservation = () => {
 };
 const WithoutReservation = () => {
   return (
-    <Link link to="/reservation">
+    // <Link link to="/reservation">
       <Card raised>
         <Card.Content>
           <Card.Header>Without reservation</Card.Header>
@@ -81,7 +81,7 @@ const WithoutReservation = () => {
           </Button>
         </Card.Content>
       </Card>
-    </Link>
+    // </Link>
   );
 };
 
