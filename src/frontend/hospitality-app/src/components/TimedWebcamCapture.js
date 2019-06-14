@@ -119,7 +119,7 @@ class TimedWebcamCapture extends React.Component {
           {Open ? (
             <div>
               <Sound url={finished} playStatus={this.state.play} autoLoad />
-              <Segment style ={{width: "70vh", height: "30vh", fontWeight: "bold",
+              <Segment style ={{width: "80vh", height: "30vh", fontWeight: "bold",
               fontSize: "5em"}} inverted>
                 <Header content="Door opened" />
                 <h1> Welcome </h1>
