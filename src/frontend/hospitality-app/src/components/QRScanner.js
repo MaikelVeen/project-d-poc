@@ -93,7 +93,7 @@ export class QRScanner extends React.Component {
             {scannerEnabled ? (
               <div>
                 <QrReader
-                  delay={300}
+                  delay={2000}
                   onError={this.handleError}
                   onScan={this.handleScan}
                   style={{
