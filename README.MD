@@ -7,6 +7,17 @@ Imagine never having to use a key or NFC card to enter a room in a hotel. That's
 ---
 
 # Installation and setup
+
+When using MacOS or Linux you can you use the bash script in the bin folder to run the backend and frontend. You can use the following commands:
+
+```
+bash ./bin/run_frontend.sh 
+bash ./bin/run_backend.sh 
+```
+
+When using Windows, please follow the manual installation steps given below.
+
+
 ## Backend
 ### Backend installation and setup
 
@@ -35,7 +46,7 @@ Add the following lines to this file:
 ```
 
 
-###email setup
+### Email setup
 
 To get QRCode's send to you via email there are a few steps you have to undertake before it will actually send emails to you.
 First of all you need a Gmail account. If you don't have a gmail account you need to make one. 
@@ -57,6 +68,26 @@ Why we do this:
     We do this because its a good practice to store sensitive data outside of the view of source control and of course, it's not wise to have passwords in plaintext in your files.
 
 That concludes the email setup
+
+### Amazon command line tools
+
+The Amazon rekognition api requires a working connection. For this it is necessary to install AWS CLI in your environment. With AWS CLI it is possible to make a connection with the api, so that you can make api calls carelessly.
+
+Python on windows
+`C:\> pip install awscli`
+
+Python on MAC OS
+`$ pip install awscli --upgrade --user`
+
+After AWS CLI has been installed, it is time to configure it so that a connection can be created. Because the AWS Keys are linked to a personal credit card, we prefer not to share the keys online. If a teacher wants to use this, please contact us and we will share the keys with you once.
+
+```
+$ aws configure
+AWS Access Key ID [None]: Please Contact us for the Key ID
+AWS Secret Access Key [None]: Please Contact us for the Acces Key
+Default region name [None]: us-west-2
+Default output format [None]: ENTER
+```
 
 ### Running the backend
 
@@ -103,117 +134,6 @@ After you installed Node you need to run the following commands in the hospitall
 npm install 
 npm start
 ```
-
-
----
-# API Documentation
----
-# Register a new guest
-
-Registers a new user to the system. User gets saved to database and user is sent an email with a QR Code that gets generated
-
-**URL** : `/register/post`
-
-**Method** : `POST`
-
-**Auth required** : NO
-
-**Permissions required** : None
-
-**Data constraints**
-
-Provide name, email and phone number 
-
-
-**Data example** All fields must be sent.
-
-```json
-{
-	"name":"John Doe",
-	"email":"email@test.nl",
-	"phone":"0786184910"
-}
-```
-
-## Success Response
-
-**Condition** : If everything is OK 
-
-**Code** : `201 CREATED`
-
-**Content example**
-
-```json
-{
-    "id": 123,
-    "name": "Build something project dot com",
-    "url": "http://testserver/api/accounts/123/"
-}
-```
-
-## Error Responses
-
-**Condition** : If fields are missed or body is not json
-
-**Code** : `400 BAD REQUEST`
-
-# Check a QR Code
-
-Checks if a given QR code corresponds to a valid user id in the database. On properly formed request the server should always return 200 OK. Use json field 'valid' to determine if user id is valid
-
-**URL** : `/check/qr`
-
-**Method** : `POST`
-
-**Auth required** : NO
-
-**Permissions required** : None
-
-**Data constraints**
-
-Provide id scanned in front end
-
-
-**Data example** All fields must be sent.
-
-```json
-{
-	"id":"6097fed738974d16889cf13df1b9"
-}
-```
-
-## Success Response
-
-**Condition** : If everything is OK 
-
-**Code** : `200 OK`
-
-**Content examples**
-
-```json
-{
-    "id": "6097fed738974d16889cf13df1b964f6",
-    "name": "John Doe",
-    "valid": true
-}
-
-{
-    "id": "6097fed738974d16889cf13df1b964",
-    "name": "",
-    "valid": false
-}
-```
-
-## Error Responses
-
-**Condition** : If fields are missed or body is not json
-
-**Code** : `400 BAD REQUEST`
-
-**Condition** : Internal server error
-
-**Code** : `500 INTERNAL SERVER ERROR`
-
 ---
 
 # Documentation Links
